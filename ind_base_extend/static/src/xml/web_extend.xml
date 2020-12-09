@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<templates id="web.template" xml:space="preserve">-->
+<!--    <t t-extend="Sidebar">-->
+
+<!--        <t t-jquery="div[class='btn-group o_dropdown']" t-operation="replace">-->
+
+<!--        <div class="btn-group o_dropdown">-->
+
+<!--            <button t-if=" section.name != 'buttons'" class="o_dropdown_toggler_btn btn btn-secondary dropdown-toggle"-->
+<!--                    data-toggle="dropdown" aria-expanded="false">-->
+<!--                <t t-if="section.name == 'files'" t-raw="widget.items[section.name].length || ''"/>-->
+<!--                <t t-esc="section.label"/>-->
+<!--            </button>-->
+<!--            <t t-if="section.name == 'buttons'" t-foreach="widget.items[section.name]" t-as="item"-->
+<!--               t-att-class="item.classname">-->
+<!--                <a t-att-title="item.title or None" t-att-data-section="section.name" t-att-data-index="item_index"-->
+<!--                   t-att-href="item.url or '#'" target="_blank">-->
+<!--                    <t t-raw="item.label"/>-->
+<!--                </a>-->
+<!--            </t>-->
+<!--        </div>-->
+<!--    </t>-->
+<!--</t>-->
+<!--</templates>-->

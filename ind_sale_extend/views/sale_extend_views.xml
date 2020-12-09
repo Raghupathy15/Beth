@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    <record id="view_order_tree_inherit" model="ir.ui.view">-->
+    <!--        <field name="name">sale.order.tree.inherit</field>-->
+    <!--        <field name="model">sale.order</field>-->
+    <!--        <field name="inherit_id" ref="sale.view_order_tree"/>-->
+    <!--        <field name="arch" type="xml">-->
+
+    <!--                        <xpath expr="//field[@name='partner_id']" position="attributes">-->
+    <!--                            <attribute name="string">Dealer</attribute>-->
+    <!--                        </xpath>-->
+    <!--            &lt;!&ndash;            <xpath expr="//field[@name='partner_id']" position="after">&ndash;&gt;-->
+    <!--            &lt;!&ndash;                <field name="dealer_id" string="Customer"/>&ndash;&gt;-->
+    <!--            &lt;!&ndash;            </xpath>&ndash;&gt;-->
+    <!--            &lt;!&ndash;            <xpath expr="//field[@name='commitment_date']" position="attributes">&ndash;&gt;-->
+    <!--            &lt;!&ndash;                <attribute name="invisible">1</attribute>&ndash;&gt;-->
+    <!--            &lt;!&ndash;            </xpath>&ndash;&gt;-->
+    <!--        </field>-->
+    <!--    </record>-->
+    <record id="view_quotation_tree_inherit" model="ir.ui.view">
+        <field name="name">sale.order.tree</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree"/>
+        <field name="arch" type="xml">
+<!--            <xpath expr="/tree" position="attributes">-->
+<!--                <attribute name="attrs">{'readonly': [('state', '!=', 'draft')]}</attribute>-->
+<!--            </xpath>-->
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="string">SO No</attribute>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="string">Store Name</attribute>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="dealer_id" string="Customer"/>
+            </xpath>
+            <xpath expr="//field[@name='commitment_date']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//field[@name='expected_date']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//field[@name='team_id']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//field[@name='team_id']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//field[@name='amount_untaxed']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//field[@name='amount_tax']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//field[@name='invoice_status']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//field[@name='tag_ids']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//field[@name='company_id']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_order_form_inherit" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='invoice_count']" position="attributes">
+                <attribute name="string">Payment</attribute>
+            </xpath>
+            <!--                                        <field name="invoice_count" widget="statinfo" string="Invoices"/>-->
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="is_admin" invisible="1"/>
+                <field name="file" filename="file_name" attrs="{'invisible': [('state', '=', 'draft')], 'readonly': [('is_admin', '!=', True)]}"/>
+                <field name="file_name" invisible="1"/>
+                <field name="sap_number" attrs="{'invisible': [('state', '=', 'draft')], 'readonly': [('is_admin', '!=', True)]}"/>
+
+                <!--                <field name="sap_file" filename="sap_file_name" attrs="{'invisible': [('state', '=', 'draft')]}"/>-->
+                <!--                <field name="sap_file_name" invisible="1"/>-->
+                <field name="type_of_order"/>
+                <field name="status_of_downpayment" readonly="0" invisible="1"/>
+                <field name="scheme"/>
+                <field name="cancel_reason" states="approve,cancel" attrs="{'readonly': [('state', '=', 'sale')]}"/>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="dealer_id" string="Customer"/>
+                <field name="finance_team_approval_status" invisible="1"/>
+                <field name="sap_sale_no" invisible="1"/>
+                <field name="sap_file" filename="file_name" invisible="1"/>
+                <field name="sap_file_name" invisible="1"/>
+            </xpath>
+
+
+            <xpath expr="//field[@name='payment_term_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='validity_date']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+<!--            <xpath expr="//field[@name='partner_id']" position="attributes">-->
+<!--&lt;!&ndash;                <attribute name="string">Store Name</attribute>&ndash;&gt;-->
+<!--                <attribute name="attrs">{'readonly': [('date_order','=', True)]}</attribute>-->
+<!--            </xpath>-->
+            <xpath expr="//label[@for='date_order']" position="replace">
+                <label for="date_order" string="Created on"/>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="string">Store Name</attribute>
+               <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+                        <xpath expr="//field[@name='partner_id']" position="after">
+
+            <field name="partner_id" string="Store Name" readonly='1' widget="res_partner_many2one" context="{'res_partner_search_mode': 'customer', 'show_address': 1, 'show_vat': True}" options='{"always_reload": True}' attrs="{'readonly': [('origin', '=', True)]}"/>
+                        </xpath>
+            <xpath expr="//field[@name='order_line']/tree[1]/field[@name='tax_id']" position="attributes">
+               <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+
+            <xpath expr="//tree/control/create[@name='add_section_control']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//tree/control/create[@name='add_note_control']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+<!--            <xpath expr="//field[@name='dealer_id']" position="after">-->
+<!--                <button name="testing_log" type="object" string="testing_log"/>-->
+<!--            </xpath>-->
+            <xpath expr="//field[@name='order_line']/tree[1]/field[@name='customer_lead']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+<!--                        <xpath expr="//field[@name='order_line']/tree[1]/field[@name='name']" position="replace">-->
+<!--                            <field name="name" style="width: 637px !important;"/>-->
+<!--                        </xpath>-->
+            <!--            <xpath expr="//field[@name='order_line']/tree[1]/field[@name='name']" position="attributes">-->
+            <!--                <attribute name="invisible">1</attribute>-->
+            <!--            </xpath>-->
+            <xpath expr="//field[@name='order_line']/tree[1]/field[@name='discount']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree[1]/field[@name='price_unit']" position="replace">
+                <field name="price_unit" string="DP"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree[1]/field[@name='product_id']" position="after">
+                <field name="product_code" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree[1]/field[@name='product_template_id']" position="before">
+                <field name="line_no" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree[1]/field[@name='product_template_id']" position="attributes">
+                <attribute name="string">SAP Code</attribute>
+                <attribute name="options">{'no_create_edit': True, 'no_create': True, 'no_open': True}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree[1]/field[@name='price_unit']" position="before">
+                <field name="rrp_unit_price"/>
+                <field name="rrp_amount"/>
+                <!--                                <button name="check_rule_date_from" type="object" string="qqqqqqqqqqqqqqqqq"/>-->
+
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree[1]/field[@name='price_unit']" position="after">
+                <field name="dealer_id" invisible="1"/>
+                <field name="partner_id" invisible="1"/>
+                <field name="date_order" invisible="1"/>
+                <field name="scheme_id" options="{'no_open': True, 'no_create': True}"/>
+                <!--                domain="[-->
+                <!--                            '&amp;',-->
+                <!--                                ('from_date', '<=', order_id.date_order),-->
+                <!--                                ('to_date', '>=', order_id.date_order))-->
+                <!--                    ]"/>-->
+                <field name="scheme_discount" invisible="1"/>
+
+                <field name="dp_value_after_discount"/>
+                <!--                                <field name="price_total"/>-->
+
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']/tree[1]/field[@name='price_subtotal']" position="before">
+                <field name="dp_unit_final_value"/>
+                <field name="test" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree[1]/field[@name='discount']" position="replace">
+                <field name="discount" string="Forc Disc %"/>
+            </xpath>
+            <!--            <xpath expr="//field[@name='order_line']/tree[1]/field[@name='price_subtotal']" position="attributes">-->
+            <!--                <attribute name="string" string="DP value after discount"/>-->
+            <!--            </xpath>-->
+<!--            <xpath expr="//field[@name='order_line']/tree[1]/field[@name='product_uom_qty']" position="after">-->
+<!--                <field name="line_status"/>-->
+<!--            </xpath>-->
+            <xpath expr="//field[@name='order_line']/tree[1]/field[@name='product_uom_qty']" position="attributes">
+               <attribute name="string">Qty</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree[1]/field[@name='qty_invoiced']" position="attributes">
+                <attribute name="string">Payment</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree[1]/field[@name='tax_id']" position="attributes">
+                <attribute name="invisible">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='amount_tax']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='amount_total']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <!--                        <xpath expr="//field[@name='amount_total']" position="replace">-->
+
+            <!--                                                <field name="amount_total" nolabel="0"  invisible="1" widget='monetary' options="{'currency_field': 'currency_id'}"/>-->
+            <!--                        </xpath>-->
+            <xpath expr="//div[@class='oe_subtotal_footer_separator oe_inline o_td_label']" position="replace">
+                <div class="oe_subtotal_footer_separator oe_inline o_td_label" invisible="1">
+                    <label for="amount_total"/>
+                </div>
+            </xpath>
+
+
+            <xpath expr="//header[1]/button[9]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//header[1]/button[10]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_quotation_send']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_draft']" position="attributes">
+                <attribute name="string">Return to 6A</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_cancel']" position="before">
+
+                <button name="state_sale_request" type="object" states="draft" string="6B-Sales order requested"/>
+                <button name="state_sale" type="object" states="sale_request" string="7A-Sales quote for approval" groups="base.group_system"/>
+
+
+            </xpath>
+            <xpath expr="//field[@name='state']" position="replace">
+
+                <field name="state" widget="statusbar" statusbar_visible="draft,approve,sale"/>
+            </xpath>
+            <xpath expr="//header[1]/button[7]" position="attributes">
+                <attribute name="invisible">1</attribute>
+
+
+            </xpath>
+            <xpath expr="//header[1]/button[8]" position="replace">
+                <button name="action_confirm"
+                        string="7B-Approve sales Quote " type="object"
+                        attrs="{'invisible': [('state', 'not in', ['approve'])]}"/>
+
+
+            </xpath>
+            <xpath expr="//button[@name='action_cancel']" position="replace">
+                <button name="action_cancel" states="draft,approve" type="object" string="Cancel"/>
+
+
+            </xpath>
+            <xpath expr="//button[@name='preview_sale_order']" position="attributes">
+                <attribute name="invisible">1</attribute>
+
+
+            </xpath>
+
+            <xpath expr="//button[3]" position="attributes">
+
+                <attribute name="string">Create sale order</attribute>
+
+            </xpath>
+            <xpath expr="//button[4]" position="attributes">
+                <attribute name="string">Create sale order</attribute>
+
+            </xpath>
+            <xpath expr="//field[@name='amount_untaxed']" position="attributes">
+                <attribute name="invisible">1</attribute>
+
+            </xpath>
+            <xpath expr="//field[@name='amount_untaxed']" position="after">
+                <field name="sum_total_dp"/>
+                <field name="sum_total_rrp"/>
+                <field name="sum_total_discount"/>
+                <field name="sum_total_line_items" invisible="1"/>
+                <!--                <field name="sum_total_forecast_discount"/>-->
+            </xpath>
+            <!--            <xpath expr="//field[@name='amount_tax']" position="attributes">-->
+            <!--                <attribute name="invisible">1</attribute>-->
+            <!--</xpath>-->
+            <!--            <xpath expr="//field[@name='amount_untaxed']" position="attributes">-->
+            <!--                <attribute name="invisible">1</attribute>-->
+            <!--</xpath>-->
+                        <xpath expr="//page[@name='optional_products']" position="attributes">
+                            <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+                        </xpath>
+            <xpath expr="//page[@name='other_information']" position="attributes">
+                            <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+                        </xpath>
+            <xpath expr="//page[3]" position="after">
+                <page name="blpl_team" string="Direct Store Team" invisible="1">
+                    <group name="container_row_2">
+                        <group>
+                            <field name="national_head_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="blpl_master_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="blpl_store_team_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="interior_consultant_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="sales_team_lead_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="sales_lead_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="blpl_service_techinician_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="deal_associate_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="blpl_associate_id" options="{'no_open': True, 'no_create': True}"/>
+                        </group>
+                    </group>
+                </page>
+                <page name="blpl2_team" string="Direct BLPL Team" invisible="1">
+                    <group>
+                        <group>
+                            <field name="regional_bdm_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="bdm_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="blpl_service_manager_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="blpl_service_engineer_id" options="{'no_open': True, 'no_create': True}"/>
+                        </group>
+                    </group>
+                </page>
+                <page name="franchisee_team" string="Franchisee Team" invisible="1">
+                    <group>
+                        <group>
+                            <field name="franchisee_national_head_id"/>
+                            <field name="franchisee_master_id"/>
+                            <field name="franchisee_owner_id"/>
+                            <field name="sales_cordinators_id"/>
+                            <field name="sales_managere_id"/>
+                            <field name="sales_executive_id"/>
+                            <field name="service_technician_id"/>
+                            <field name="franchisee_dealer_id"/>
+                            <field name="associates_id"/>
+                        </group>
+                    </group>
+                </page>
+                <page name="franchisee_blpl_team" string="Franchisee BLPL Team" invisible="1">
+                    <group>
+                        <group>
+                            <field name="franchisee_rm_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="franchisee_bdm_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="franchisee_blpl_service_manager_id"
+                                   options="{'no_open': True, 'no_create': True}"/>
+                            <field name="franchisee_blpl_service_engineer_id"
+                                   options="{'no_open': True, 'no_create': True}"/>
+
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+        <!--sale~~~~~~^Wizard~~~~~~~^sale_product_configuator_views.xml-->
+
+<!--    <record id="sale_product_configurator_view_form_inherit" model="ir.ui.view">-->
+<!--        <field name="name">sale_product_configurator.product.configurator.view.form.inherit</field>-->
+<!--        <field name="model">sale.product.configurator</field>-->
+<!--        <field name="inherit_id" ref="sale_product_configurator.sale_product_configurator_view_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--                 <xpath expr="//field[@name='product_template_id']" position="attributes">-->
+<!--                <attribute name="String">SAP Code11</attribute>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//field[@name='custom_value']" position="attributes">-->
+<!--                <attribute name="String">DP</attribute>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+
+    <record id="sale_product_configurator.sale_product_configurator_view_form" model="ir.ui.view">
+        <field name="name">sale_product_configurator.product.configurator.view.form</field>
+        <field name="model">sale.product.configurator</field>
+        <field name="arch" type="xml">
+            <form js_class="product_configurator_form">
+                <group>
+                    <field name="product_template_id" string= "SAP Code" class="oe_product_configurator_product_template_id" options="{'no_open': True, 'no_create': True}"/>
+                    <field name="sale_description"/>
+
+                    <field name="product_template_attribute_value_ids" invisible="1" />
+                    <field name="product_custom_attribute_value_ids" invisible="1" widget="one2many" >
+                        <tree>
+                            <field name="custom_product_template_attribute_value_id"/>
+                            <field name="custom_value"/>
+                        </tree>
+                    </field>
+                    <field name="product_no_variant_attribute_value_ids" invisible="1" />
+                    <field name="quantity" invisible="1" />
+                </group>
+                <footer>
+                    <button string="Add" class="btn-primary o_sale_product_configurator_add" special="add"/>
+                    <button string="Save" class="btn-primary o_sale_product_configurator_edit" style="display: none;" special="save"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <!--sale~~~~~~^Wizard~~~~~~~^sale_make_invoice_advance_views.xml-->
+
+    <record id="view_sale_advance_payment_inv_inherit" model="ir.ui.view">
+        <field name="name">Invoice Orders Inherit</field>
+        <field name="model">sale.advance.payment.inv</field>
+        <field name="inherit_id" ref="sale.view_sale_advance_payment_inv"/>
+
+        <field name="arch" type="xml">
+            <xpath expr="//p[@class='oe_grey']" position="attributes">
+
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+
+            <xpath expr="//field[@name='advance_payment_method']" position="attributes">
+
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <!--                <xpath expr="//field[@name='amount']" position="attributes">-->
+
+            <!--                                             <attribute name="string">Payment</attribute>-->
+            <!--                             </xpath>-->
+            <xpath expr="//label[@for='amount']" position="after">
+
+                <label for="amount" string="Payment in Amount"
+                       attrs="{'invisible': [('advance_payment_method', '=', 'percentage')]}"/>
+                <label for="amount" string="In Percentage"
+                       attrs="{'invisible': [('advance_payment_method', '=', 'fixed')]}"/>
+            </xpath>
+            <xpath expr="//footer" position="replace">
+
+                <footer>
+                    <!--                        <button name="create_invoices" string="Create and View Invoice" type="object"-->
+                    <!--                            context="{'open_invoices': True}" class="btn-primary"/>-->
+                    <button name="create_invoices" string="Create Sale" type="object" groups="ind_access_extend.group_is_accountant"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sale.action_view_sale_advance_payment_inv" model="ir.actions.act_window">
+            <field name="name">Create Sale</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.advance.payment.inv</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="groups_id" eval="[(4,ref('sales_team.group_sale_salesman'))]"/>
+            <!-- TODO: check if we need this -->
+            <field name="binding_model_id" ref="sale.model_sale_order" />
+            <field name="binding_view_types">list</field>
+        </record>
+
+    <template id="sale_product_configurator.configure" name="Configure">
+        <div class="js_product main_product">
+
+            <t t-set="combination" t-value="product_combination if product_combination else product._get_first_possible_combination()"/>
+            <t t-set="combination_info" t-value="product._get_combination_info(combination, add_qty=add_qty or 1, pricelist=pricelist)"/>
+            <t t-set="product_variant" t-value="product.env['product.product'].browse(combination_info['product_id'])"/>
+
+            <input type="hidden" class="product_template_id" t-att-value="product.id"/>
+            <input type="hidden" class="product_id" t-attf-name="product_id" t-att-value="product_variant.id"/>
+            <div class="col-lg-12 text-center mt-5">
+                <t t-if="product._is_add_to_cart_possible()">
+                    <div class="col-lg-5 d-inline-block text-left">
+                        <t t-if="combination" t-call="sale.variants">
+                            <t t-set="parent_combination" t-value="None"/>
+                        </t>
+                        <h2> DP -
+                            <span  t-attf-class="text-danger oe_default_price oe_striked_price {{'' if combination_info['has_discounted_price'] else 'd-none'}}"
+                                t-esc="combination_info['list_price']"
+                                t-options='{
+                                    "widget": "monetary",
+                                    "display_currency": (pricelist or product).currency_id
+                                }'/>
+                            <span class="oe_price product_id mt-3" style="white-space: nowrap;"
+                                t-att-data-product-id="product.id"
+                                t-esc="combination_info['price']"
+                                t-options='{
+                                    "widget": "monetary",
+                                    "display_currency": (pricelist or product).currency_id
+                                }'/>
+                        </h2>
+                        <div class="css_quantity input-group">
+                            <div class="input-group-prepend">
+                                <button t-attf-href="#" class="btn btn-primary js_add_cart_json d-none d-md-inline-block" aria-label="Remove one" title="Remove one">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                            <input type="text" class="js_quantity form-control quantity" data-min="1" name="add_qty" t-att-value="add_qty or 1"/>
+                            <div class="input-group-append">
+                                <button t-attf-href="#" class="btn btn-primary float_left js_add_cart_json d-none d-md-inline-block" aria-label="Add one" title="Add one">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="css_not_available_msg alert alert-warning">This combination does not exist.</p>
+                    </div>
+                    <div class="col-lg-1 d-inline-block"></div>
+                    <div class="col-lg-5 d-inline-block align-top text-left">
+                        <img t-if="product_variant" t-att-src="'/web/image/product.product/%s/image_1024' % product_variant.id" class="d-block product_detail_img" alt="Product Image"/>
+                        <img t-else="" t-att-src="'/web/image/product.template/%s/image_1024' % product.id" class="d-block product_detail_img" alt="Product Image"/>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="col-lg-5 d-inline-block text-left">
+                        <p class="alert alert-warning">This product has no valid combination.</p>
+                    </div>
+                </t>
+            </div>
+        </div>
+    </template>
+
+</odoo>

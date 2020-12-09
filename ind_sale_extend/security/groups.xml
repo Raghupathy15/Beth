@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- View Access for Regional BDM Access From Sale Full access -->
+
+        <record id="view_sale_admin_form_rule_id" model="ir.rule">
+            <field name="name">Sale Admin</field>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4, ref('base.group_system')), (4, ref('ind_access_extend.group_national_head_admin'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <!-- View Access for Sale (who created CRM) Access Sale Full access -->
+        <record id="view_who_create_crm_form_rule_id" model="ir.rule">
+            <field name="name">CRM Lead Created </field>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            <field name="domain_force">[('opportunity_id.user_id','=',user.id)]</field>
+        </record>
+
+        <!-- View Access for Regional BDM Access From Sale Full access -->
+        <record id="view_sale_regional_bdm_form_rule_id" model="ir.rule">
+            <field name="name">Sale RM Direct Access</field>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_regional_bdm_admin'))]"/>
+            <field name="domain_force">[('regional_bdm_id', '=', user.id)]
+            </field>
+        </record>
+
+        <!-- View Access for BDM Access From Sale Full access -->
+        <record id="view_sale_bdm_form_rule_id" model="ir.rule">
+            <field name="name">Sale BDM DirectAccess</field>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_bdm_admin'))]"/>
+            <field name="domain_force">[('bdm_id', '=', user.id)]
+            </field>
+        </record>
+
+        <!-- View Access for BLPL Service Manager Access From CRM Full access -->
+        <record id="view_sale_blpl_service_manager_form_rule_id" model="ir.rule">
+            <field name="name">BLPL Service Manager Access</field>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_blpl_service_manager_admin'))]"/>
+            <field name="domain_force">[('blpl_service_manager_id', '=', user.id)]
+            </field>
+        </record>
+
+        <!-- View Access for Service Engineer Access From CRM Full access -->
+        <record id="view_sale_blpl_service_engg_form_rule_id" model="ir.rule">
+            <field name="name">Service Engineer Access</field>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_blpl_service_engineer_admin'))]"/>
+            <field name="domain_force">[('blpl_service_engineer_id', '=', user.id)]
+            </field>
+        </record>
+
+
+        <!-- View Access for BLPL Store Team Access From Sale Full access -->
+        <record id="view_sale_blpl_store_team_form_rule_id" model="ir.rule">
+            <field name="name">Sale BLPL Store Manager Access</field>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_blpl_store_team_admin'))]"/>
+            <field name="domain_force">[('blpl_store_team_id', '=', user.id)]
+            </field>
+        </record>
+
+        <!-- View Access for Interior Consultant Access From Sale Full access -->
+        <record id="view_sale_interior_consultant_form_rule_id" model="ir.rule">
+            <field name="name">Sale Interior Consultant Access</field>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_interior_consultant_admin'))]"/>
+            <field name="domain_force">[('interior_consultant_id', '=', user.id)]
+            </field>
+        </record>
+
+        <!-- View Access for Sales Team Lead Access From Sale Full access -->
+        <record id="view_sale_sales_team_lead_form_rule_id" model="ir.rule">
+            <field name="name">Sale Sales Team Lead Access</field>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_sales_team_lead_admin'))]"/>
+            <field name="domain_force">[('sales_team_lead_id', '=', user.id)]
+            </field>
+
+        </record>
+
+        <!-- View Access for Sales Lead Access From Sale Full access -->
+        <record id="view_sale_sales_lead_form_rule_id" model="ir.rule">
+            <field name="name">Sale Sales Lead Access</field>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_sales_lead_admin'))]"/>
+            <field name="domain_force">[('sales_lead_id', '=', user.id)]
+            </field>
+        </record>
+
+         <!-- View Access for Service Technician Access From CRM Full access -->
+        <record id="view_sale_blpl_service_tech_form_rule_id" model="ir.rule">
+            <field name="name">Service Technician Access</field>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_blpl_service_tech_admin'))]"/>
+            <field name="domain_force">[('blpl_service_techinician_id','=',user.id)]</field>
+        </record>
+
+        <!-- View Access for Dealer Access From Sale Full access -->
+        <record id="view_sale_dealer_associates_form_rule_id" model="ir.rule">
+            <field name="name">Sale Dealer Access</field>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_dealer_associates_admin'))]"/>
+            <field name="domain_force">[('deal_associate_id','=',user.id)]</field>
+        </record>
+
+        <!-- View Access for Associates Access From CRM Full access -->
+        <record id="view_sale_blpl_associates_form_rule_id" model="ir.rule">
+            <field name="name">Associates Access</field>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_blpl_associates_admin'))]"/>
+            <field name="domain_force">[('blpl_associate_id','=',user.id)]</field>
+        </record>
+
+        <!-- Franchisee Access-->
+        <!-- View Access for Franchisee RM Sale Full access -->
+
+        <record id="view_sale_franchisee_rm_form_rule_id" model="ir.rule">
+            <field name="name">Franchisee RM Access</field>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_franchisee_rm_admin'))]"/>
+            <field name="domain_force">[('franchisee_rm_id', '=', user.id)]
+        </field>
+        </record>
+
+        <!-- View Access for Franchisee BDM Sale Full access -->
+
+        <record id="view_sale_franchisee_bdm_form_rule_id" model="ir.rule">
+            <field name="name">Franchisee BDM Access</field>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_franchisee_bdm_admin'))]"/>
+            <field name="domain_force">[('franchisee_bdm_id', '=', user.id)]
+        </field>
+        </record>
+
+
+
+        <!-- View Access for Franchisee BLPL Service Manager Full access -->
+
+        <record id="view_sale_franchisee_blpl_service_manager_form_rule_id" model="ir.rule">
+            <field name="name">Franchisee BLPL Service Manager Access</field>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_franchisee_service_manager_admin'))]"/>
+            <field name="domain_force">[('franchisee_blpl_service_manager_id', '=', user.id)]
+        </field>
+        </record>
+
+        <!-- View Access for Franchisee Service Engineer Full access -->
+
+        <record id="view_sale_franchisee_service_engg_form_rule_id" model="ir.rule">
+            <field name="name">Franchisee Service Engineer Access</field>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_franchisee_service_engineer_admin'))]"/>
+            <field name="domain_force">[('franchisee_blpl_service_engineer_id', '=', user.id)]
+        </field>
+        </record>
+
+                     <!-- View Access for Franchisee Owner CRM Full access -->
+
+        <record id="view_sale_franchisee_owner_form_rule_id" model="ir.rule">
+            <field name="name">Sale Franchisee Owner Access</field>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_franchisee_owner_admin'))]"/>
+            <field name="domain_force">[('franchisee_owner_id', '=', user.id)]
+        </field>
+        </record>
+
+                     <!-- View Access for Franchisee Sales Cordinators CRM Full access -->
+
+        <record id="view_sale_franchisee_sales_cordinators_form_rule_id" model="ir.rule">
+            <field name="name">Sale Franchisee Sales Cordinator Access</field>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_sales_cordinator_admin'))]"/>
+            <field name="domain_force">[('sales_cordinators_id', '=', user.id)]
+        </field>
+        </record>
+
+                     <!-- View Access for Franchisee Sales Manager CRM Full access -->
+
+        <record id="view_sale_franchisee_sales_manager_form_rule_id" model="ir.rule">
+            <field name="name">Sale Franchisee Sales Manager Access</field>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_sales_manager_admin'))]"/>
+            <field name="domain_force">[('sales_managere_id', '=', user.id)]
+        </field>
+        </record>
+
+                     <!-- View Access for Franchisee Sales Executive CRM Full access -->
+
+        <record id="view_sale_franchisee_sales_executive_form_rule_id" model="ir.rule">
+            <field name="name">Sale Franchisee Sales Executive Access</field>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_sales_executive_admin'))]"/>
+            <field name="domain_force">[('sales_executive_id', '=', user.id)]
+        </field>
+        </record>
+
+                    <!-- View Access for Franchisee Service Techinician CRM Full access -->
+
+        <record id="view_sale_franchisee_service_techinian_form_rule_id" model="ir.rule">
+            <field name="name">Sale Franchisee Service Techinician Access</field>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_service_technician_admin'))]"/>
+            <field name="domain_force">[('service_technician_id', '=', user.id)]
+        </field>
+        </record>
+                <!-- View Access for Franchisee Dealer CRM Full access -->
+
+        <record id="view_sale_franchisee_dealer_form_rule_id" model="ir.rule">
+            <field name="name">Sale Franchisee Dealer Access</field>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_dealer_admin'))]"/>
+            <field name="domain_force">[('franchisee_dealer_id', '=', user.id)]</field>
+        </record>
+                <!-- View Access for Franchisee Associates CRM Full access -->
+
+        <record id="view_sale_franchisee_associates_form_rule_id" model="ir.rule">
+            <field name="name">Sale Franchisee Associates Access</field>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_associates_admin'))]"/>
+            <field name="domain_force">[('associates_id','=',user.id)]</field>
+        </record>
+
+
+    </data>
+</odoo>

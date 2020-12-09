@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_move_form_inherit" model="ir.ui.view">
+        <field name="name">account.move.form.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//h1[1]" position="replace">
+                <h1>
+                    <span attrs="{'invisible': ['|', '|', ('type', '!=', 'out_invoice'), ('state', '!=', 'draft'), ('name', '!=', '/')]}">
+                        Draft
+                    </span>
+                    <span attrs="{'invisible': ['|', '|', ('type', '!=', 'out_refund'), ('state', '!=', 'draft'), ('name', '!=', '/')]}">
+                        Draft Credit Note
+                    </span>
+                    <span attrs="{'invisible': ['|', '|', ('type', '!=', 'in_invoice'), ('state', '!=', 'draft'), ('name', '!=', '/')]}">
+                        Draft Bill
+                    </span>
+                    <span attrs="{'invisible': ['|', '|', ('type', '!=', 'in_refund'), ('state', '!=', 'draft'), ('name', '!=', '/')]}">
+                        Draft Refund
+                    </span>
+                    <span attrs="{'invisible': ['|', '|', ('type', '!=', 'out_receipt'), ('state', '!=', 'draft'), ('name', '!=', '/')]}">
+                        Draft Sales Receipt
+                    </span>
+                    <span attrs="{'invisible': ['|', '|', ('type', '!=', 'in_receipt'), ('state', '!=', 'draft'), ('name', '!=', '/')]}">
+                        Draft Purchase Receipt
+                    </span>
+                </h1>
+            </xpath>
+            <div name="button_box" position="inside">
+                <button class="oe_stat_button" type="object" name="get_mrp"
+                        icon="fa-tags" groups="base.group_system"
+                        attrs="{'invisible': [('finance_team_approval', '=', 'approved')]}">
+                    <field string="Queued for manufacturing" name="queue_mrp" widget="statinfo"/>
+                </button>
+            </div>
+            <xpath expr="//div[@class='o_td_label']" position="replace">
+                <div class="o_td_label" groups="ind_access_extend.group_hide_menus">
+                    <label for="partner_id" string="Customer" style="font-weight:bold;"
+                           attrs="{'invisible': [('type', 'not in', ('out_invoice', 'out_refund', 'out_receipt'))]}"/>
+                    <label for="partner_id" string="Vendor" style="font-weight:bold;"
+                           attrs="{'invisible': [('type', 'not in', ('in_invoice', 'in_refund', 'in_receipt'))]}"/>
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='ref']" position="after">
+                <field name="dealer_id" force_save="1"/>
+            </xpath>
+            <xpath expr="//field[@name='invoice_date']" position="after">
+                <field name="is_admin_group" invisible="1"/>
+                <field name="is_finance_group" invisible="1"/>
+                <field name="sap_sale_no"
+                       attrs="{'invisible': [('state', 'not in', ['posted'])], 'readonly': ['|', ('is_admin_group', '=', False), ('finance_team_approval', '=', 'approved')]}"/>
+                <field name="sap_file" filename="file_name"
+                       attrs="{'invisible': [('state', 'not in', ['posted'])], 'readonly': ['|', ('is_admin_group', '=', False), ('finance_team_approval', '=', 'approved')]}"/>
+                <field name="sap_file_name" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="finance_team_approval" readonly="1" force_save="1"
+                       attrs="{'invisible': [('state', 'not in', ['posted'])]}"/>
+                <field name="approved_id" readonly="1" force_save="1"
+                       attrs="{'invisible': [('approved_id', '=', False)]}"/>
+                <field name="finance_conf_details"
+                       attrs="{'invisible': [('state', 'not in', ['posted'])], 'readonly': ['|', ('is_finance_group', '=', False), ('finance_team_approval', '=', 'approved')]}"/>
+            </xpath>
+            <xpath expr="//button[@name='action_invoice_register_payment']" position="after">
+                <button name="state_full_payment_approve_mrp" string="Finance Approve for Manufacturing" type="object"
+                        class="btn-primary"
+                        attrs="{'invisible': [('finance_team_approval', '=', 'approved')]}"
+                        groups="ind_access_extend.group_finance_account_manager_admin,ind_access_extend.group_finance_executive_admin,ind_access_extend.group_finance_head_admin"/>
+            </xpath>
+            <xpath expr="//button[@name='action_invoice_sent']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='preview_invoice']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_reverse']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='button_draft']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='amount_untaxed']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <!--                <attribute name="string">Store Name</attribute>-->
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <div class="o_td_label">
+                    <label for="partner_id" string="Store Name" style="font-weight:bold;"
+                           attrs="{'invisible': [('type', 'not in', ('out_invoice', 'out_refund', 'out_receipt'))]}"/>
+                    <label for="partner_id" string="Store Name" style="font-weight:bold;"
+                           attrs="{'invisible': [('type', 'not in', ('in_invoice', 'in_refund', 'in_receipt'))]}"/>
+                </div>
+
+                <field name="partner_id" widget="res_partner_many2one" readonly="1" nolabel="1"
+                       context="{
+                                            'res_partner_search_mode': (context.get('default_type', 'entry') in ('out_invoice', 'out_refund', 'out_receipt') and 'customer') or (context.get('default_type', 'entry') in ('in_invoice', 'in_refund', 'in_receipt') and 'supplier') or False,
+                                            'show_address': 1, 'default_is_company': True, 'show_vat': True}"
+                       options='{"always_reload": True, "no_quick_create": True}'
+                       attrs="{'invisible': [('type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt'))]}"/>
+            </xpath>
+            <xpath expr="//label[@for='invoice_date']" position="attributes">
+                <attribute name="string">Payment Date</attribute>
+            </xpath>
+            <xpath expr="//field[@name='invoice_line_ids']/tree[1]/field[@name='price_unit']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='invoice_line_ids']/tree[1]/field[@name='discount']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='invoice_line_ids']/tree[1]/field[@name='quantity']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//page[@id='invoice_tab']" position="attributes">
+                <attribute name="string">Payment Lines</attribute>
+            </xpath>
+            <xpath expr="//group[@name='sale_info_group']" position="attributes">
+                <attribute name="string">Misc</attribute>
+            </xpath>
+            <xpath expr="//field[@name='invoice_line_ids']/tree[1]/field[@name='tax_ids']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_invoice_register_payment']" position="attributes">
+                <attribute name="string">Payment</attribute>
+            </xpath>
+            <xpath expr="//field[@name='invoice_origin']" position="after">
+                <field name="sale_source_id"/>
+            </xpath>
+            <xpath expr="//page[3]" position="after" invisible="1">
+                <page name="blpl_team" string="Direct Store Team" invisible="1">
+                    <group name="container_row_2">
+                        <group>
+                            <field name="national_head_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="blpl_master_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="blpl_store_team_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="interior_consultant_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="sales_team_lead_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="sales_lead_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="blpl_service_techinician_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="deal_associate_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="blpl_associate_id" options="{'no_open': True, 'no_create': True}"/>
+                        </group>
+                    </group>
+                </page>
+                <page name="blpl2_team" string="Direct BLPL Team" invisible="1">
+                    <group>
+                        <group>
+                            <field name="regional_bdm_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="bdm_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="blpl_service_manager_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="blpl_service_engineer_id" options="{'no_open': True, 'no_create': True}"/>
+                        </group>
+                    </group>
+                </page>
+                <page name="franchisee_team" string="Franchisee Team" invisible="1">
+                    <group>
+                        <group>
+                            <field name="franchisee_national_head_id"/>
+                            <field name="franchisee_master_id"/>
+                            <field name="franchisee_owner_id"/>
+                            <field name="sales_cordinators_id"/>
+                            <field name="sales_managere_id"/>
+                            <field name="sales_executive_id"/>
+                            <field name="service_technician_id"/>
+                            <field name="franchisee_dealer_id"/>
+                            <field name="associates_id"/>
+                        </group>
+                    </group>
+                </page>
+                <page name="franchisee_blpl_team" string="Franchisee BLPL Team" invisible="1">
+                    <group>
+                        <group>
+                            <field name="franchisee_rm_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="franchisee_bdm_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="franchisee_blpl_service_manager_id"
+                                   options="{'no_open': True, 'no_create': True}"/>
+                            <field name="franchisee_blpl_service_engineer_id"
+                                   options="{'no_open': True, 'no_create': True}"/>
+
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_invoice_tree_inherit" model="ir.ui.view">
+        <field name="name">account.invoice.tree.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_invoice_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="string">Sale</attribute>
+            </xpath>
+            <xpath expr="//field[5]" position="attributes">
+                <attribute name="string">Store Name</attribute>
+            </xpath>
+            <xpath expr="//field[6]" position="attributes">
+                <attribute name="string">Store Name</attribute>
+            </xpath>
+            <xpath expr="//field[7]" position="attributes">
+                <attribute name="string">Payment Date</attribute>
+            </xpath>
+            <xpath expr="//field[8]" position="attributes">
+                <attribute name="string">Payment Date</attribute>
+            </xpath>
+            <xpath expr="//field[@name='invoice_user_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+    <!--Register Payment -->
+
+    <record id="view_account_payment_form_inherit" model="ir.ui.view">
+        <field name="name">account.payment.form</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="string">Finance Approval for Manufacturing</attribute>
+            </xpath>
+            <xpath expr="//field[@name='communication']" position="attributes">
+                <attribute name="string">Payment Reference</attribute>
+            </xpath>
+            <!--            <xpath expr="//field[@name='cheque_reference']" position="attributes">-->
+            <!--                <attribute name="invisible">1</attribute>-->
+            <!--            </xpath>-->
+            <!--                                    <xpath expr="//field[@name='journal_id']" position="replace">-->
+
+            <!--            <field name="journal_id" attrs="{'invisible': [('amount', '=', 0), ('state', '!=', 'draft')]}"/>-->
+            <!--                                    </xpath>-->
+            <xpath expr="//field[@name='payment_method_id']" position="replace">
+
+                <field name="payment_method_id" readonly="1" force_save="1"
+                       attrs="{'invisible': [('hide_payment_method', '=', True)]}"/>
+            </xpath>
+
+
+        </field>
+    </record>
+
+    <record id="account.view_account_payment_invoice_form" model="ir.ui.view">
+        <field name="name">account.payment.invoice.form</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position='replace'></xpath>
+            <xpath expr="//div[@name='button_box']" position='replace'></xpath>
+            <xpath expr="//sheet" position='after'>
+                <footer>
+                    <field name="state" invisible="1"/>
+                    <button string='Update' name="post" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="account.action_move_out_invoice_type" model="ir.actions.act_window">
+        <field name="name">Payment</field>
+        <field name="res_model">account.move</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="view_id" ref="account.view_invoice_tree"/>
+        <field name="search_view_id" ref="account.view_account_invoice_filter"/>
+        <field name="domain">[('type', '=', 'out_invoice')]</field>
+        <field name="context">{'default_type': 'out_invoice'}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a customer invoice
+            </p>
+            <p>
+                Create invoices, register payments and keep track of the discussions with your customers.
+            </p>
+        </field>
+    </record>
+
+    <!--        <record id="account.action_account_invoice_from_list" model="ir.actions.server">-->
+    <!--            <field name="name">Register Payment</field>-->
+    <!--            <field name="model_id" ref="account.model_account_payment"/>-->
+    <!--            <field name="binding_model_id" ref="account.model_account_move"/>-->
+    <!--            <field name="binding_view_types">list</field>-->
+    <!--            <field name="state">code</field>-->
+    <!--            <field name="code">-->
+    <!--                action = model.action_register_payment()-->
+    <!--            </field>-->
+    <!--        </record>-->
+</odoo>

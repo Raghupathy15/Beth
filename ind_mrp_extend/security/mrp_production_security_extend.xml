@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- View Access for Regional BDM Access From MRP Full access -->
+
+        <record id="view_mrp_admin_form_rule_id" model="ir.rule">
+            <field name="name">MRP Admin</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4, ref('base.group_system')), (4, ref('ind_access_extend.group_national_head_admin'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <!-- View Access for MRP (who created CRM) Access From MRP Full access -->
+        <record id="view_mrp_who_create_form_rule_id" model="ir.rule">
+            <field name="name">Lead Created </field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            <field name="domain_force">[('order_id.opportunity_id.user_id','=',user.id)]</field>
+        </record>
+
+        <!-- View Access for Regional BDM Access From MRP Full access -->
+        <record id="view_mrp_regional_bdm_form_rule_id" model="ir.rule">
+            <field name="name">MRP Regional BDM Access</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_regional_bdm_admin'))]"/>
+            <field name="domain_force">[('regional_bdm_id', '=', user.id)]
+            </field>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <!-- View Access for BDM Access From MRP Full access -->
+        <record id="view_mrp_bdm_form_rule_id" model="ir.rule">
+            <field name="name">MRP BDM Access</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_bdm_admin'))]"/>
+            <field name="domain_force">[('bdm_id', '=', user.id)]
+            </field>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+
+
+        <!-- View Access for BLPL Service Manager Access From CRM Full access -->
+        <record id="view_mrp_service_manager_form_rule_id" model="ir.rule">
+            <field name="name">MRP BLPL Service Manager Access</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_blpl_service_manager_admin'))]"/>
+            <field name="domain_force">[('blpl_service_manager_id', '=', user.id)]
+            </field>
+        </record>
+
+        <!-- View Access for Service Engineer Access From CRM Full access -->
+        <record id="view_mrp_service_engg_form_rule_id" model="ir.rule">
+            <field name="name">MRP Service Engineer Access</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_blpl_service_engineer_admin'))]"/>
+            <field name="domain_force">[('blpl_service_engineer_id', '=', user.id)]
+            </field>
+        </record>
+
+        <!-- View Access for BLPL Store Team Access From MRP Full access -->
+        <record id="view_mrp_blpl_store_team_form_rule_id" model="ir.rule">
+            <field name="name">MRP BLPL Store Manager Access</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_blpl_store_team_admin'))]"/>
+            <field name="domain_force">[('blpl_store_team_id', '=', user.id)]
+            </field>
+        </record>
+
+        <!-- View Access for Interior Consultant Access From MRP Full access -->
+        <record id="view_mrp_interior_consultant_form_rule_id" model="ir.rule">
+            <field name="name">MRP Interior Consultant Access</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_interior_consultant_admin'))]"/>
+            <field name="domain_force">[('interior_consultant_id', '=', user.id)]
+            </field>
+        </record>
+
+        <!-- View Access for Sales Team Lead Access From MRP Full access -->
+        <record id="view_mrp_sales_team_lead_form_rule_id" model="ir.rule">
+            <field name="name">MRP Sales Team Lead Access</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_sales_team_lead_admin'))]"/>
+            <field name="domain_force">[('sales_team_lead_id', '=', user.id)]
+            </field>
+
+        </record>
+
+        <!-- View Access for Sales Lead Access From MRP Full access -->
+        <record id="view_mrp_sales_lead_form_rule_id" model="ir.rule">
+            <field name="name">MRP Sales Lead Access</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_sales_lead_admin'))]"/>
+            <field name="domain_force">['|', ('sales_lead_id', '=', user.id),
+                ('deal_associate_id.blpl_master_id.sales_lead_ids', '=', user.id)]
+            </field>
+        </record>
+
+        <!-- View Access for Dealer / Associates Access From MRP Full access -->
+        <record id="view_mrp_dealer_associates_form_rule_id" model="ir.rule">
+            <field name="name">MRP Dealer</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_dealer_associates_admin'))]"/>
+            <field name="domain_force">[('deal_associate_id','=',user.id)]</field>
+        </record>
+
+        <!-- View Access for Associates Access From MRP Full access -->
+        <record id="view_mrp_associates_form_rule_id" model="ir.rule">
+            <field name="name">MRP Associated</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_blpl_associates_admin'))]"/>
+            <field name="domain_force">[('blpl_associate_id','=',user.id)]</field>
+        </record>
+
+
+
+
+              <!-- Franchisee Access-->
+
+         <!-- View Access for Franchisee BDM Sale Full access -->
+
+        <record id="view_mrp_franchisee_bdm_form_rule_id" model="ir.rule">
+            <field name="name">Franchisee BDM Access</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_franchisee_bdm_admin'))]"/>
+            <field name="domain_force">[('franchisee_bdm_id', '=', user.id)]
+        </field>
+        </record>
+
+        <!-- View Access for Franchisee RM Sale Full access -->
+
+        <record id="view_mrp_franchisee_rm_form_rule_id" model="ir.rule">
+            <field name="name">Franchisee RM Access</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_franchisee_rm_admin'))]"/>
+            <field name="domain_force">[('franchisee_rm_id', '=', user.id)]
+        </field>
+        </record>
+
+        <!-- View Access for Franchisee BLPL Service Manager Full access -->
+
+        <record id="view_mrp_franchisee_blpl_service_manager_form_rule_id" model="ir.rule">
+            <field name="name">Franchisee BLPL Service Manager Access</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_franchisee_service_manager_admin'))]"/>
+            <field name="domain_force">[('franchisee_blpl_service_manager_id', '=', user.id)]
+        </field>
+        </record>
+
+        <!-- View Access for Franchisee Service Engineer Full access -->
+
+        <record id="view_mrp_franchisee_service_engg_form_rule_id" model="ir.rule">
+            <field name="name">Franchisee Service Engineer Access</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_franchisee_service_engineer_admin'))]"/>
+            <field name="domain_force">[('franchisee_blpl_service_engineer_id', '=', user.id)]
+        </field>
+        </record>
+
+
+
+                     <!-- View Access for Franchisee Owner CRM Full access -->
+
+        <record id="view_mrp_franchisee_owner_form_rule_id" model="ir.rule">
+            <field name="name">MRP Franchisee Owner Access</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_franchisee_owner_admin'))]"/>
+            <field name="domain_force">[('franchisee_owner_id', '=', user.id)]
+        </field>
+        </record>
+
+                     <!-- View Access for Franchisee Sales Cordinators CRM Full access -->
+
+        <record id="view_mrp_franchisee_sales_cordinators_form_rule_id" model="ir.rule">
+            <field name="name">MRP Franchisee Sales Cordinator Access</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_sales_cordinator_admin'))]"/>
+            <field name="domain_force">[('sales_cordinators_id', '=', user.id)]
+        </field>
+        </record>
+
+                     <!-- View Access for Franchisee Sales Manager CRM Full access -->
+
+        <record id="view_mrp_franchisee_sales_manager_form_rule_id" model="ir.rule">
+            <field name="name">MRP Franchisee Sales Manager Access</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_sales_manager_admin'))]"/>
+            <field name="domain_force">[('sales_managere_id', '=', user.id)]
+        </field>
+        </record>
+
+                     <!-- View Access for Franchisee Sales Executive CRM Full access -->
+
+        <record id="view_mrp_franchisee_sales_executive_form_rule_id" model="ir.rule">
+            <field name="name">MRP Franchisee Sales Executive Access</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_sales_executive_admin'))]"/>
+            <field name="domain_force">[('sales_executive_id', '=', user.id)]
+        </field>
+        </record>
+
+                    <!-- View Access for Franchisee Service Techinician CRM Full access -->
+
+        <record id="view_mrp_franchisee_service_techinian_form_rule_id" model="ir.rule">
+            <field name="name">MRP Franchisee Service Techinician Access</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_service_technician_admin'))]"/>
+            <field name="domain_force">[('service_technician_id', '=', user.id)]
+        </field>
+        </record>
+                <!-- View Access for Franchisee Dealer CRM Full access -->
+
+        <record id="view_mrp_franchisee_dealer_form_rule_id" model="ir.rule">
+            <field name="name">MRP Franchisee Dealer Access</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_dealer_admin'))]"/>
+            <field name="domain_force">[('franchisee_dealer_id', '=', user.id)]</field>
+        </record>
+                <!-- View Access for Franchisee Associates CRM Full access -->
+
+        <record id="view_mrp_franchisee_associates_form_rule_id" model="ir.rule">
+            <field name="name">MRP Franchisee Associates Access</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_associates_admin'))]"/>
+            <field name="domain_force">[('associates_id','=',user.id)]</field>
+        </record>
+
+        <!--Manufacturing rule-->
+
+        <record id="view_mrp_status_rule_id" model="ir.rule">
+            <field name="name">Manufacture Status</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_mrp_status'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="view_mrp_cpc_rule_id" model="ir.rule">
+            <field name="name">CPC (Central Processing Team)</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_cpc_admin'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="view_mrp_design_lead_rule_id" model="ir.rule">
+            <field name="name">Design Lead</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_design_head_admin'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="view_mrp_design_executive_rule_id" model="ir.rule">
+            <field name="name">Design Executive</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_design_executive_admin'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="view_mrp_finance_acc_manager_rule_id" model="ir.rule">
+            <field name="name">Finance Account Manager</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_finance_account_manager_admin'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="view_mrp_finance_executive_rule_id" model="ir.rule">
+            <field name="name">Finance Executive</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_finance_executive_admin'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="view_mrp_finance_head_rule_id" model="ir.rule">
+            <field name="name">Finance Head</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_finance_head_admin'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="view_mrp_purchase_executive_rule_id" model="ir.rule">
+            <field name="name">Purchase Executive</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_purchase_team_admin'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="view_mrp_production_manager_rule_id" model="ir.rule">
+            <field name="name">Production Manager</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_production_team_admin'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="view_mrp_punch_laser_rule_id" model="ir.rule">
+            <field name="name">Punching/Laser</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_punching_laser_admin'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="view_mrp_bending_rule_id" model="ir.rule">
+            <field name="name">Bending</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_bending_admin'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="view_mrp_sub_assembly_rule_id" model="ir.rule">
+            <field name="name">Sub-assembly</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_subassembly_admin'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="view_mrp_color_to_be_send_rule_id" model="ir.rule">
+            <field name="name">Coloring to be send</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_coloring_to_be_send_admin'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="view_mrp_color_send_rule_id" model="ir.rule">
+            <field name="name">Coloring Send</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_coloring_send_admin'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="view_mrp_color_completed_rule_id" model="ir.rule">
+            <field name="name">Coloring Completed</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_coloring_completed_admin'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="view_mrp_final_assembly_rule_id" model="ir.rule">
+            <field name="name">Final Assembly</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_final_assembly_admin'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="view_mrp_quality_engg_rule_id" model="ir.rule">
+            <field name="name">Quality Engineer</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_quality_admin'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="view_mrp_desp_executive_rule_id" model="ir.rule">
+            <field name="name">Despatch Executive</field>
+            <field name="model_id" ref="model_mrp_production"/>
+            <field name="groups" eval="[(4, ref('ind_access_extend.group_despatch_admin'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+        <!--End Manufacturing rule-->
+
+
+    </data>
+</odoo>

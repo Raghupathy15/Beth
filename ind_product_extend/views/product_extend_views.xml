@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="product_template_form_view_inherit" model="ir.ui.view">
+        <field name="name">product.template.form.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='taxes_id']" position="before">
+                <field name="rrp_unit_price"/>
+                <field name="product_code"/>
+                <field name="product_group_id"/>
+                <field name="product_category_id"/>
+                <field name="series"/>
+                <field name="length"/>
+                <field name="width"/>
+                <field name="height"/>
+                <field name="nationality"/>
+            </xpath>
+            <xpath expr="//field[@name='categ_id']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//label[@for='list_price']" position="attributes">
+                <attribute name="string">DP</attribute>
+            </xpath>
+            <xpath expr="//field[@name='categ_id']" position="after">
+                <field name="weight"/>
+                <field name="package_vol_cum"/>
+                <field name="number_packets"/>
+                <field name="warranty_months"/>
+                <field name="carcass_area"/>
+                <field name="facia_area"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <!--product_group Master -->
+    <record id="view_product_group_master_form" model="ir.ui.view">
+        <field name="name">product_group.master.form</field>
+        <field name="model">product_group.master</field>
+        <field name="arch" type="xml">
+            <form string="Product Group Master">
+                <group>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_product_group_master_tree" model="ir.ui.view">
+        <field name="name">product_group.master.form</field>
+        <field name="model">product_group.master</field>
+        <field name="arch" type="xml">
+            <tree string="Product Group Master">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- product_group Menu -->
+    <record id="product_group_master_action" model="ir.actions.act_window">
+        <field name="name">Product Group Master</field>
+        <field name="res_model">product_group.master</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a Approximate Group
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+            id="menu_product_group_mastern"
+            action="product_group_master_action"
+            parent="stock.menu_stock_inventory_control"
+    />
+
+    <!--product_category Master -->
+    <record id="view_product_category_master_form" model="ir.ui.view">
+        <field name="name">product_category.master.form</field>
+        <field name="model">product_category.master</field>
+        <field name="arch" type="xml">
+            <form string="Product Category Master">
+                <group>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_product_category_master_tree" model="ir.ui.view">
+        <field name="name">product_category.master.form</field>
+        <field name="model">product_category.master</field>
+        <field name="arch" type="xml">
+            <tree string="Product Category Master">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- product_group Menu -->
+    <record id="product_category_master_action" model="ir.actions.act_window">
+        <field name="name">Product Category Master</field>
+        <field name="res_model">product_category.master</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a Approximate Category
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+            id="menu_product_category_mastern"
+            action="product_category_master_action"
+            parent="stock.menu_stock_inventory_control"
+    />
+</odoo>

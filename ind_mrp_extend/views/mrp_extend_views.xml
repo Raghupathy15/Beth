@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mrp_production_tree_view_inherit" model="ir.ui.view">
+        <field name="name">mrp.production.tree</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">0</attribute>
+                <attribute name="duplicate">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='product_id']" position="before">
+                <field name="dealer_id" optional="show" groups="mrp.group_mrp_user,mrp.group_mrp_manager"/>
+                <field name="partner_id" optional="show" groups="mrp.group_mrp_user,mrp.group_mrp_manager"/>
+                <field name="type_of_order" optional="show" groups="mrp.group_mrp_user,mrp.group_mrp_manager"/>
+            </xpath>
+            <xpath expr="//field[@name='product_id']" position="after">
+                <field name="sap_sale_no" readonly="1" optional="show"/>
+                <field name="sap_code_sale" invisible= "1"/>
+                 <field name="sap_code_sale_char" readonly="1" optional="show" />
+                <field name="description_sale" readonly="1" optional="show"/>
+            </xpath>
+            <!--            <xpath expr="//field[@name='origin']" position="attributes">-->
+            <!--                <attribute name="invisible">1</attribute>-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//field[@name='name']" position="after">-->
+            <!--                <field name="origin" optional="show"/>-->
+            <!--                <field name="sale_date_order" optional="show"/>-->
+            <!--            </xpath>-->
+            <xpath expr="//field[@name='origin']" position="after">
+                <field name="sale_date_order" widget="date" optional="show"
+                       groups="mrp.group_mrp_user,mrp.group_mrp_manager"/>
+
+            </xpath>
+            <xpath expr="//field[@name='product_qty']" position="after">
+                <field name="sum_total_dp" optional="show" groups="mrp.group_mrp_user,mrp.group_mrp_manager"/>
+                <field name="price_subtotal" optional="show" groups="mrp.group_mrp_user,mrp.group_mrp_manager"/>
+            </xpath>
+
+            <xpath expr="//field[@name='state']" position="after">
+                <field name="custom_progress" widget="progressbar" string="Progress"
+                       groups="ind_access_extend.group_mrp_status"/>
+                <field name="progress" widget="progressbar" string="Progress"
+                       groups="mrp.group_mrp_user,mrp.group_mrp_manager"/>
+                <field name="company_branch_type" invisible="1"/>
+                <field name="tentative_date"/>
+                <field name="mrp_queue_no" groups="mrp.group_mrp_user,mrp.group_mrp_manager"/>
+                <field name="mrp_queue_no_change" invisible="1"/>
+                <field name="write_date" string="Last Modified Date" widget="date" optional="show"
+                       groups="mrp.group_mrp_user,mrp.group_mrp_manager"/>
+                <field name="fg_credited_date" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='date_planned_start']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//field[@name='reservation_state']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//field[@name='company_id']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//field[@name='state']" position="attributes">
+                <attribute name="groups">mrp.group_mrp_user,mrp.group_mrp_manager</attribute>
+            </xpath>
+            <xpath expr="//field[@name='product_qty']" position="attributes">
+                <attribute name="groups">mrp.group_mrp_user,mrp.group_mrp_manager</attribute>
+            </xpath>
+            <xpath expr="//field[@name='bom_id']" position="attributes">
+                <attribute name="groups">mrp.group_mrp_user,mrp.group_mrp_manager</attribute>
+            </xpath>
+            <xpath expr="//field[@name='product_qty']" position="replace">
+                <field name="product_qty" widget="integer"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="mrp_production_form_view_inherit" model="ir.ui.view">
+        <field name="name">mrp.production.form.inherit</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="replace">
+                <field name="state" widget="statusbar"
+                       statusbar_visible="design_stage,ready_for_punching,punching_done,bending_done,sub_assembly,coloring_set,
+                       coloring_sent,color_sent,coloring_completed,final_assembly,quality_approved,fg_credited,desp,installation,to_close,confirmed,assigned,done"/>
+            </xpath>
+            <xpath expr="//button[@name='action_confirm']" position="replace">
+                <button name="action_confirm"
+                        attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('is_locked', '=', False)]}"
+                        string="Mark as Todo" type="object" class="oe_highlight"
+                        groups="ind_access_extend.group_design_head_admin,ind_access_extend.group_design_executive_admin"/>
+            </xpath>
+            <xpath expr="//button[@name='action_cancel']" position="attributes">
+                <attribute name="groups">base.group_system</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_cancel']" position="after">
+                <field name="availability" invisible="1"/>
+                <button name="state_design"
+                        attrs="{'invisible': ['|', ('availability', '!=', True), ('state', '!=', 'confirmed')]}"
+                        string="Design Stage" type="object" class="oe_highlight"
+                        groups="ind_access_extend.group_design_head_admin,ind_access_extend.group_design_executive_admin,ind_access_extend.group_production_team_admin"/>
+                <button name="state_punching" attrs="{'invisible': ['|', ('state', '!=', 'design_stage')]}"
+                        string="Ready For Punching" type="object" class="oe_highlight"
+                        groups="ind_access_extend.group_purchase_team_admin,ind_access_extend.group_production_team_admin"/>
+                <button name="state_punching_done" attrs="{'invisible': ['|', ('state', '!=', 'ready_for_punching')]}"
+                        string="Punching Done" type="object" class="oe_highlight"
+                        groups="ind_access_extend.group_punching_laser_admin,ind_access_extend.group_production_team_admin"/>
+                <button name="state_bending_done" attrs="{'invisible': ['|', ('state', '!=', 'punching_done')]}"
+                        string="Bending Done" type="object" class="oe_highlight"
+                        groups="ind_access_extend.group_bending_admin,ind_access_extend.group_production_team_admin"/>
+                <button name="state_sub_assembly" attrs="{'invisible': ['|', ('state', '!=', 'bending_done')]}"
+                        string="Sub Assembly" type="object" class="oe_highlight"
+                        groups="ind_access_extend.group_subassembly_admin,ind_access_extend.group_production_team_admin"/>
+                <button name="state_color_set" attrs="{'invisible': ['|', ('state', '!=', 'sub_assembly')]}"
+                        string="Coloring to be set" type="object" class="oe_highlight"
+                        groups="ind_access_extend.group_coloring_to_be_send_admin,ind_access_extend.group_production_team_admin"/>
+                <button name="state_color_sent" attrs="{'invisible': ['|', ('state', '!=', 'coloring_set')]}"
+                        string="Coloring sent" type="object" class="oe_highlight"
+                        groups="ind_access_extend.group_coloring_send_admin,ind_access_extend.group_production_team_admin"/>
+                <button name="state_color_completed" attrs="{'invisible': ['|', ('state', '!=', 'color_sent')]}"
+                        string="Coloring Completed" type="object" class="oe_highlight"
+                        groups="ind_access_extend.group_coloring_completed_admin,ind_access_extend.group_production_team_admin"/>
+                <button name="state_final_assembly" attrs="{'invisible': ['|', ('state', '!=', 'coloring_completed')]}"
+                        string="Final Assembly" type="object" class="oe_highlight"
+                        groups="ind_access_extend.group_final_assembly_admin,ind_access_extend.group_production_team_admin"/>
+                <button name="state_qua_approved" attrs="{'invisible': ['|', ('state', '!=', 'final_assembly')]}"
+                        string="Quality Approved" type="object" class="oe_highlight"
+                        groups="ind_access_extend.group_quality_admin,ind_access_extend.group_production_team_admin"/>
+                <button name="state_fg_credited" attrs="{'invisible': ['|', ('state', '!=', 'quality_approved')]}"
+                        string="FG Credited" type="object" class="oe_highlight"
+                        groups="ind_access_extend.group_quality_admin,ind_access_extend.group_production_team_admin"/>
+                <button name="state_desp" attrs="{'invisible': ['|', ('state', '!=', 'fg_credited')]}"
+                        string="Despatched" type="object" class="oe_highlight"
+                        groups="ind_access_extend.group_despatch_admin,ind_access_extend.group_production_team_admin"/>
+                <button name="state_install" attrs="{'invisible': ['|', ('state', '!=', 'desp')]}"
+                        string="Installation" type="object" class="oe_highlight"/>
+                <!--                <button name="state_install_completed" attrs="{'invisible': ['|', ('state', '!=', 'installation')]}"-->
+                <!--                        string="Installation Completed" type="object" class="oe_highlight"/>-->
+                <!--                <button name="state_warranty_card"-->
+                <!--                        attrs="{'invisible': ['|', ('state', '!=', 'installtion_completed')]}" string="Warranty Card"-->
+                <!--                        type="object" class="oe_highlight"/>-->
+            </xpath>
+            <xpath expr="//button[@name='button_mark_done']" position="attributes">
+                <attribute name="string">Warranty Card</attribute>
+            </xpath>
+            <xpath expr="//button[6]" position="replace">
+
+                <button name="open_produce_product" attrs="{'invisible': ['|', ('state', '!=', 'installation')]}"
+                        string="Installation Completed" type="object" class="oe_highlight"/>
+            </xpath>
+            <xpath expr="//button[7]" position="replace">
+
+                <button name="open_produce_product"
+                        attrs="{'invisible': ['|', '|', '|', '|', ('state', '=', 'to_close'), ('state', '!=', 'installtion'), ('is_locked', '=', False), ('reservation_state', 'not in', ('confirmed', 'waiting')), ('routing_id', '!=', False)]}"
+                        string="Produce" type="object"/>
+
+            </xpath>
+            <!--            <xpath expr="//button[19]" position="replace">-->
+
+            <!--                <button name="open_produce_product"-->
+            <!--                        attrs="{'invisible': ['|', '|', '|', '|', '|',('state', '!=', 'installation'), ('state', '=', 'to_close'), ('state', '!=', 'done'), ('is_locked', '=', False), ('reservation_state', '!=', 'assigned'), ('routing_id', '!=', False)]}"-->
+            <!--                        string="Produce" type="object" class="oe_highlight"/>-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//button[20]" position="replace">-->
+
+            <!--                <button name="open_produce_product"-->
+            <!--                        attrs="{'invisible': ['|', '|', '|', '|', '|', ('state', '!=', 'installation'), ('state', '=', 'to_close'), ('state', '!=', 'done'), ('is_locked', '=', False), ('reservation_state', 'not in', ('confirmed', 'waiting')), ('routing_id', '!=', False)]}"-->
+            <!--                        string="Produce" type="object"/>-->
+            <!--            </xpath>-->
+            <xpath expr="//button[@name='post_inventory']" position="replace">
+
+                <button name="post_inventory" string="Post Inventory" type="object" invisible="1"
+                        groups="base.group_no_one"/>
+            </xpath>
+            <xpath expr="//button[@name='button_scrap']" position="replace">
+
+                <button name="button_scrap" type="object" string="Scrap" invisible="1"/>
+            </xpath>
+            <xpath expr="//button[@name='button_unreserve']" position="replace">
+
+                <button name="button_unreserve" type="object" string="Unreserve" invisible="1"/>
+            </xpath>
+            <xpath expr="//button[@name='button_unreserve']" position="replace">
+
+                <button name="button_unreserve" type="object" string="Unreserve" invisible="1"/>
+            </xpath>
+            <xpath expr="//button[11]" position="replace">
+                <button name="action_toggle_is_locked" invisible="1" string="Unlock" groups="mrp.group_mrp_manager"
+                        type="object"
+                        help="Unlock the manufacturing order to correct what has been consumed or produced."/>
+            </xpath>
+            <xpath expr="//button[12]" position="replace">
+                <button name="action_toggle_is_locked" invisible="1" string="Lock" class="oe_highlight"
+                        groups="mrp.group_mrp_manager" type="object"/>
+            </xpath>
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="is_finance_group" invisible="1"/>
+                <!--                <field name="finance_team" attrs="{'readonly': [('state', '!=', 'confirmed')]}" groups="ind_access_extend.group_finance_account_manager_admin,ind_access_extend.group_finance_executive_admin,ind_access_extend.group_finance_head_admin"/>-->
+                <!--                <field name="finance_head" attrs="{'readonly': [('state', '!=', 'confirmed')]}" groups="ind_access_extend.group_finance_head_admin"/>-->
+                <field name="finance_team_desp"
+                       attrs="{'readonly': ['|', ('state', '!=', 'fg_credited'), ('is_finance_group', '=', 'False')]}"/>
+                <field name="install_completed_dealer" attrs="{'readonly': [('state', '!=', 'installation')]}"/>
+                <field name="install_completed_customer" attrs="{'readonly': [('state', '!=', 'installation')]}"/>
+                <field name="mrp_queue_no"/>
+                <field name="mrp_queue_no_change" invisible="1"/>
+                <field name="tentative_date" force_save="1"/>
+            </xpath>
+            <xpath expr="//field[@name='origin']" position="before">
+                <field name="sale_date_order" readonly="1" force_save="1"/>
+                <field name="write_date" string="Last Modified Date" readonly="1"/>
+                <field name="fg_credited_date" readonly="1" force_save="1"/>
+
+            </xpath>
+            <xpath expr="//field[@name='bom_id']" position="after">
+                <field name="sum_total_dp"/>
+                <field name="price_subtotal" readonly="1" force_save="1"/>
+                <field name="type_of_order" force_save="1"/>
+                <field name="sap_sale_no"/>
+                <field name="sap_file" filename="file_name"/>
+                <field name="sap_file_name" invisible="1"/>
+                <field name="company_branch_type" invisible="0"/>
+            </xpath>
+            <xpath expr="//field[@name='date_deadline']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//div[@class='o_row o_td_label']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//div[@class='o_row']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//field[@name='origin']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//field[@name='company_id']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//field[@name='product_id']" position="before">
+                <field name="dealer_id"/>
+                <field name="partner_id"/>
+            </xpath>
+            <xpath expr="//field[@name='product_id']" position="after">
+                <field name="sap_code_sale" invisible="1"/>
+                <field name="sap_code_sale_char"/>
+                <field name="description_sale"/>
+            </xpath>
+            <xpath expr="//field[@name='origin']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//field[@name='origin']" position="after">
+                <field name="order_id" readonly="1" force_save="1" options="{'no_open': True, 'no_create': True}"/>
+                <field name="progress" widget="progressbar"/>
+                <field name="is_visible" force_save="1" invisible="1"/>
+                <field name="custom_progress" widget="progressbar" invisible="1"/>
+                <!--                <field name="state"/>-->
+                <!--                <progressbar field="state"/>-->
+                <!--                    <field name="state" widget="progressbar" colors='{"confirmed": "success", "cancel": "warning", "done": "danger"}' help="This bar allows to filter the opportunities based on scheduled activities."/>-->
+            </xpath>
+            <xpath expr="//page[3]" position="after">
+                <page name="blpl_team" string="Direct Store Team" invisible="1">
+                    <group name="container_row_2">
+                        <group>
+                            <field name="national_head_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="blpl_master_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="blpl_store_team_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="interior_consultant_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="sales_team_lead_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="sales_lead_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="blpl_service_techinician_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="deal_associate_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="blpl_associate_id" options="{'no_open': True, 'no_create': True}"/>
+                        </group>
+                    </group>
+                </page>
+                <page name="blpl2_team" string="Direct BLPL Team" invisible="1">
+                    <group>
+                        <group>
+                            <field name="regional_bdm_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="bdm_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="blpl_service_manager_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="blpl_service_engineer_id" options="{'no_open': True, 'no_create': True}"/>
+                        </group>
+                    </group>
+                </page>
+                <page name="franchisee_team" string="Franchisee Team" invisible="1">
+                    <group>
+                        <group>
+                            <field name="franchisee_national_head_id"/>
+                            <field name="franchisee_master_id"/>
+                            <field name="franchisee_owner_id"/>
+                            <field name="sales_cordinators_id"/>
+                            <field name="sales_managere_id"/>
+                            <field name="sales_executive_id"/>
+                            <field name="service_technician_id"/>
+                            <field name="franchisee_dealer_id"/>
+                            <field name="associates_id"/>
+                        </group>
+                    </group>
+                </page>
+                <page name="franchisee_blpl_team" string="Franchisee BLPL Team" invisible="1">
+                    <group>
+                        <group>
+                            <field name="franchisee_rm_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="franchisee_bdm_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="franchisee_blpl_service_manager_id"
+                                   options="{'no_open': True, 'no_create': True}"/>
+                            <field name="franchisee_blpl_service_engineer_id"
+                                   options="{'no_open': True, 'no_create': True}"/>
+                        </group>
+                    </group>
+                </page>
+
+                <page string="Product Checklist">
+                    <group>
+                        <group>
+                            <field name="product_group_id" options="{'no_open': True, 'no_create': True}"/>
+                        </group>
+                    </group>
+                    <field name="checklist_ids" widget="section_and_note_one2many">
+                        <tree editable="bottom">
+                            <field name="name"/>
+                            <field name="applicable"/>
+                            <field name="remarks"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+
+    <!--MRP filter and group by -->
+    <record id="view_mrp_production_filter_inherit" model="ir.ui.view">
+        <field name="name">mrp.production.work.order.select.inherit</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.view_mrp_production_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group/filter[@name='scheduled_date']" position="after">
+
+                <filter string="Custom source" name="source" domain="[]" context="{'group_by':'origin'}"/>
+                <!--                <filter string="Provider" name="provider" context="{'group_by':'delivery_type', 'residual_visible':True}"/>-->
+            </xpath>
+        </field>
+    </record>
+    <record id="mrp_production_action_custom" model="ir.actions.act_window">
+        <field name="name">Manufacturing Status</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mrp.production</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" eval="False"/>
+        <field name="search_view_id" ref="mrp.view_mrp_production_filter"/>
+        <field name="context">{'search_default_todo': True, 'default_company_id': allowed_company_ids[0]}</field>
+        <field name="domain">[('picking_type_id.active', '=', True), ('is_visible', '=', 'yes'),
+            ('company_id.company_branch_type', '!=', 'direct_store')]
+        </field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new manufacturing order
+                <br/>
+            </p>
+            <p>
+                Consume components and build finished products using bills of materials
+            </p>
+        </field>
+    </record>
+
+    <!--    <menuitem id="mrp_production_custom" name="Manufacturing" action="mrp_production_action_custom" sequence="1"-->
+    <!--              web_icon="ind_grievance,static/description/grievance.png"/>-->
+    <menuitem action="mrp_production_action_custom"
+              name="Manufacturing Status"
+              id="menu_mrp_production_action_custom"
+              web_icon="ind_mrp_extend,static/description/manu.png"
+              sequence="1"
+              groups="ind_access_extend.group_mrp_status"/>
+
+<!--    <record id="view_production_pivot_inherit" model="ir.ui.view">-->
+<!--        <field name="name">mrp.production.pivot.inherit</field>-->
+<!--        <field name="model">mrp.production</field>-->
+<!--        <field name="inherit_id" ref="mrp.view_production_pivot"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//field[@name='date_deadline']" position="after">-->
+<!--                <field name="price_subtotal" string="Value" type="col"/>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+</odoo>

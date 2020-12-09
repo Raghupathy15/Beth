@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_opportunity_master,"opportunity,master",ind_crm_extend.model_opportunity_master,,1,1,1,1
+access_scheme_master,"scheme,master",ind_crm_extend.model_scheme_master,,1,1,1,1
+access_budget_master,"budget,master",ind_crm_extend.model_budget_master,,1,1,1,1
+access_crm_doc_line,crm.doc.line,ind_crm_extend.model_crm_doc_line,,1,1,1,1

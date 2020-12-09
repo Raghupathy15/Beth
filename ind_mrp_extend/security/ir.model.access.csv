@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_checklist ,product.checklist,model_product_checklist,base.group_user,1,1,1,1
+access_questions_master,questions.master,model_questions_master,base.group_user,1,1,1,1
+access_questions_line,questions.line,model_questions_line,base.group_user,1,1,1,1
+access_capacity_details,capacity.details,model_capacity_details,base.group_user,1,1,1,1

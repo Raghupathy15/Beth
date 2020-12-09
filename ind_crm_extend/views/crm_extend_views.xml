@@ -1,0 +1,1384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    <record id="quick_create_opportunity_form_inherit_" model="ir.ui.view">-->
+    <!--        <field name="name">crm.lead.form.quick_create.inherit</field>-->
+    <!--        <field name="model">crm.lead</field>-->
+    <!--        <field name="inherit_id" ref="crm.quick_create_opportunity_form"/>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <xpath expr="//field[@name='name']" position="before">-->
+    <!--                <field name="seq_name" optional="show"/>-->
+    <!--            </xpath>-->
+    <!--            <xpath expr="//field[@name='partner_id']" position="before">-->
+    <!--                <field name="dealer_id" optional="show"-->
+    <!--                       string="Dealer" required="1"/>-->
+    <!--            </xpath>-->
+    <!--            <xpath expr="//field[@name='partner_id']" position="attributes">-->
+    <!--                <attribute name="required">1</attribute>-->
+    <!--            </xpath>-->
+    <!--            <xpath expr="//field[@name='priority']" position="attributes">-->
+    <!--                <attribute name="invisible">1</attribute>-->
+    <!--            </xpath>-->
+    <!--            <xpath expr="//field[@name='planned_revenue']" position="attributes">-->
+    <!--                <attribute name="invisible">1</attribute>-->
+    <!--            </xpath>-->
+    <!--            <xpath expr="//field[@name='priority']" position="after">-->
+    <!--                <field name="phone" required="1" string="Dealer Phone"/>-->
+    <!--                <field name="email_from" string="Dealer Email"/>-->
+
+    <!--                <field name="source_id" optional="show" required="1"/>-->
+
+    <!--            </xpath>-->
+    <!--        </field>-->
+    <!--    </record>-->
+
+    <record id="crm_case_tree_view_oppor_inherit" model="ir.ui.view">
+        <field name="name">crm.lead.tree.opportunity.inherit</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
+        <field name="arch" type="xml">
+            <!--            <xpath expr="//tree" position="attributes">-->
+            <!--                <attribute name="editable">top</attribute>-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//field[@name='partner_id']" position="attributes">-->
+            <!--                <attribute name="required">1</attribute>-->
+            <!--            </xpath>-->
+            <xpath expr="//field[@name='email_from']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='phone']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='stage_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <!--            <xpath expr="//field[@name='priority']" position="after">-->
+            <!--                <field name="state" string="Status"/>-->
+            <!--            </xpath>-->
+            <xpath expr="//field[@name='activity_date_deadline']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='activity_summary']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='planned_revenue']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='probability']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='team_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='tag_ids']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='priority']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='city']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='state_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='country_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='company_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="optional">show</attribute>
+            </xpath>
+            <!--            <xpath expr="//field[@name='dealer_id']" position="attributes">-->
+            <!--                <attribute name="string">Customer</attribute>-->
+            <!--            </xpath>-->
+            <xpath expr="//field[2]" position="after">
+                <field name="current_user_id" optional="show"
+                       string="Lead Created by"/>
+                <field name="seq_name"/>
+
+                <field name="partner_id" optional="show"
+                       string="Store Name"/>
+                <field name="dealer_id" optional="show"
+                       string="Customer"/>
+                <field name="dealer_phone" optional="show"/>
+                <field name="dealer_email" optional="show"/>
+                <field name="source_id" string="Lead Source" optional="show"/>
+                <field name="state" string="Status"/>
+                <field name="follow_date" optional="show"/>
+                <field name="next_follow_date" optional="show"/>
+                <field name="meeting_date" optional="show"/>
+                <field name="visit_date" optional="show"/>
+                <field name="house_warming_date" optional="show"/>
+                <field name="quote_date" optional="show"/>
+                <field name="quote_value" optional="show"/>
+                <field name="order_date" optional="show"/>
+                <field name="order_value" optional="show"/>
+                <field name="sale_req_date" optional="show"/>
+                <field name="anticipate_date" optional="show"/>
+                <field name="approximate_budget_id" optional="show"/>
+
+
+            </xpath>
+            <!--            <xpath expr="//field[@name='activity_exception_decoration']" position="after">-->
+            <!--                <button name="action_crm_lead" type="object" icon="fa-expand" title="Open" aria-label="Open"-->
+            <!--                        class="float-right"/>-->
+            <!--            </xpath>-->
+
+            <!--            <xpath expr="//field[@name='phone']" position="after">-->
+            <!--                <field name="customer_pan" readonly="0"/>-->
+            <!--            </xpath>-->
+            <xpath expr="//field[@name='create_date']" position="replace">
+               <field name="custom_create_date" widget="date"/>
+            </xpath>
+
+
+        </field>
+    </record>
+
+    <!--    <record id="crm_case_kanban_view_leads_inherit" model="ir.ui.view">-->
+    <!--        <field name="name">crm.lead.kanban.lead.inherit</field>-->
+    <!--        <field name="model">crm.lead</field>-->
+    <!--        <field name="inherit_id" ref="crm.crm_case_kanban_view_leads"/>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <xpath expr="//div[@class='oe_kanban_bottom_left']" position="replace">-->
+    <!--                <div class="oe_kanban_bottom_left">-->
+    <!--                    <field name="priority" groups="base.group_user" invisible="0"/>-->
+    <!--                    <t t-if="record.message_needaction_counter.raw_value">-->
+    <!--                        <span role="alert" class='oe_kanban_mail_new' title='Unread Messages'>-->
+    <!--                            <i class='fa fa-comments' aria-label="Unread messages" role="img"/>-->
+    <!--                            <t t-raw="record.message_needaction_counter.raw_value"/>-->
+    <!--                        </span>-->
+    <!--                    </t>-->
+    <!--                    <field name="activity_ids" widget="kanban_activity"/>-->
+    <!--                </div>-->
+    <!--            </xpath>-->
+    <!--            <xpath expr="//progressbar[@field='activity_state']" position="replace">-->
+    <!--                <field name="activity_state" invisible="1"/>-->
+
+    <!--            </xpath>-->
+    <!--        </field>-->
+    <!--    </record>-->
+
+
+    <record id="view_crm_doc_line_tree" model="ir.ui.view">
+        <field name="name">crm.doc.line.tree</field>
+        <field name="model">crm.doc.line</field>
+        <field name="arch" type="xml">
+            <tree string="Crm Document Lines" create="false">
+                <field name="crm_source_id"/>
+                <field name="name"/>
+                <field name="file_doc"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="crm_lead_view_form_inherit" model="ir.ui.view">
+        <field name="name">crm.lead.form.inherit</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="duplicate">false</attribute>
+                <attribute name="delete">false</attribute>
+
+            </xpath>
+            <!--                                    <xpath expr="//sheet" position="attributes">-->
+            <!--                                                        <attribute name="attrs">{'edit': [('state', '=', '8_bounced')]}</attribute>-->
+            <!--                        &lt;!&ndash;                <attribute name="editable">False</attribute>&ndash;&gt;-->
+
+            <!--                                    </xpath>-->
+            <xpath expr="//button[@name='action_view_sale_quotation']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='action_set_won_rainbowman']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_sale_quotations_new']" position="replace">
+
+                <button string="6A-Sale order requesting" name="action_sale_quotations_new" type="object"
+                        class="oe_highlight"
+
+                        attrs="{'invisible': ['&amp;', ('is_quote_create', '!=', True), ('crm_admin_state_access', '=', False)]}"/>
+                <!--                attrs="{'invisible': ['|', '&amp;', ('fifth_state', '!=', True), ('state', '=', '6_sale_order_requested'),('crm_admin_state_access', '=', False)]}"/>-->
+
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <field name="fifth_state" invisible="1"/>
+                <field name="fifth_5a_token_state" invisible="1"/>
+
+                <button name="state_lead" string="1-New lead" type="object" class="oe_highlight"
+                        attrs="{'invisible': ['&amp;', ('state', '!=', 'draft'), ('crm_admin_state_access', '=', False)]}"/>
+                <button name="state_first_contact" string="2-First contact" type="object" class="oe_highlight"
+                        attrs="{'invisible': ['&amp;', ('state', '!=', '1_new_lead'), ('crm_admin_state_access', '=', False)]}"/>
+                <button name="state_update_meet" string="Online Meeting" type="object" class="oe_highlight"
+                        attrs="{'invisible': ['&amp;', ('state', '!=', '2_first_contact'), ('crm_admin_state_access', '=', False)]}"/>
+                <button name="state_showroom_visit" string="3-ShowRoom visit" type="object" class="oe_highlight"
+                        attrs="{'invisible': ['&amp;', ('state', '!=', '2a_online_meet_status'), ('crm_admin_state_access', '=', False)]}"/>
+                <button name="state_quote" string="4-Quote" type="object" class="oe_highlight"
+                        attrs="{'invisible': ['&amp;', ('state', '!=', '3_showroom_visit'), ('crm_admin_state_access', '=', False)]}"/>
+                <button name="state_5a_order_placed" string="5A-Order placed token" type="object" class="oe_highlight"
+                        attrs="{'invisible': ['&amp;', ('state', '!=', '4_quote'), ('crm_admin_state_access', '=', False)]}"/>
+                <button name="state_5b_order_placed" string="5B-Order placed express" type="object"
+                        class="oe_highlight"
+                        attrs="{'invisible': ['&amp;', ('state', 'not in', ('4_quote','5a_order_placed')), ('crm_admin_state_access', '=', False)]}"/>
+                <button name="state_5c_order_placed" string="5C-Order placed standard" type="object"
+                        class="oe_highlight"
+                        attrs="{'invisible': ['&amp;', ('state', 'not in', ('4_quote','5a_order_placed')), ('crm_admin_state_access', '=', False)]}"/>
+                <button name="state_5d_order_placed" string="5D-Order placed lightning" type="object"
+                        class="oe_highlight"
+                        attrs="{'invisible': ['&amp;', ('state', 'not in', ('4_quote','5a_order_placed')), ('crm_admin_state_access', '=', False)]}"/>
+                <button name="state_sale_order_req" string="6-Sale order requested" type="object" class="oe_highlight"
+                        invisible="1"/>
+                <field name="state" widget="statusbar"/>
+                <field name="is_quote_create" invisible="1"/>
+            </xpath>
+            <xpath expr="//widget[1]" position="replace">
+                <widget name="web_ribbon" title="Bounced" bg_color="bg-danger"
+                        attrs="{'invisible': ['|', ('probability', '&gt;', 0), ('active', '=', True)]}"/>
+                <!--            <widget name="web_ribbon" title="Bounced" bg_color="bg-danger" attrs="{'invisible': [('state', '!=', '8_bounced')]}"/>-->
+            </xpath>
+            <xpath expr="//field[@name='stage_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='action_schedule_meeting']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//group/group[7]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//div[@class='oe_title']" position="replace">
+                <div class="oe_title">
+                    <h1>
+                        <field name="seq_name" readonly="1"/>
+                    </h1>
+                    <label for="name" class="oe_edit_only" string="Lead"
+                           attrs="{'invisible': [('type', '=', 'opportunity')]}"/>
+                    <label for="name" class="oe_edit_only" attrs="{'invisible': [('type', '=', 'lead')]}"/>
+                    <h1>
+                        <field name="name" placeholder="e.g. Product Pricing"
+                               options='{"no_open": True, "no_create": True}'
+                               attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                    </h1>
+                    <h2 class="o_row row no-gutters d-flex" invisible="1">
+                        <div class="col" attrs="{'invisible': [('type', '=', 'lead')]}">
+                            <label for="planned_revenue" class="oe_edit_only"/>
+                            <div class="o_row">
+                                <field name="company_currency" invisible="1"/>
+                                <field name="planned_revenue" class="oe_inline" widget='monetary'
+                                       options="{'currency_field': 'company_currency'}"/>
+                                <span class="oe_grey p-2">at</span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <span class="oe_edit_only o_pls_probability">
+                                <label for="probability"/>
+                                <button class="btn btn-link" name="action_set_automated_probability"
+                                        type="object"
+                                        attrs="{'invisible': [('is_automated_probability', '=', True)]}">
+                                    <i class="fa fa-gear" role="img" title="Switch to automatic probability"
+                                       aria-label="Switch to automatic probability"></i>
+                                </button>
+                                <small class="oe_grey"
+                                       attrs="{'invisible': [('is_automated_probability', '=', True)]}">
+                                    <field name="automated_probability"/>
+                                    %% (Estimated by Odoo)
+                                </small>
+                            </span>
+                            <div id="probability" class="o_row d-flex">
+                                <field name="is_automated_probability" invisible="1"/>
+                                <field name="probability" widget="float" class="oe_inline"/>
+                                <span class="oe_grey">%%</span>
+                            </div>
+                        </div>
+                    </h2>
+                </div>
+            </xpath>
+            <!--            <xpath expr="//group/group[1]/field[@name='partner_id']" position="attributes">-->
+
+            <!--                <attribute name="required">1</attribute>-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//group/group[2]/field[@name='partner_id']" position="attributes">-->
+
+            <!--                <attribute name="required">1</attribute>-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//field[@name='email_from']" position="attributes">-->
+            <!--                <attribute name="invisible">1</attribute>-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//field[@name='phone']" position="attributes">-->
+            <!--                <attribute name="invisible">1</attribute>-->
+            <!--            </xpath>-->
+            <xpath expr="//group/group[1]/field[@name='partner_id']" position="attributes">
+
+                <attribute name="string">Store Name</attribute>
+            </xpath>
+
+            <xpath expr="//group/group[2]/field[@name='partner_id']" position="attributes">
+
+                <attribute name="string">Store Name</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='phone']" position="replace">
+                <field name="phone"
+                       widget="phone" invisible="1" options="{'enable_sms': True}"
+                       required="0"/>
+            </xpath>
+            <xpath expr="//label[@for='email_from']" position="replace">
+                <label for="email_from" class="oe_inline" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='email_from']" position="replace">
+
+                <field name="email_from" invisible="1" string="Email" widget="email"/>
+
+            </xpath>
+            <xpath expr="//field[@name='partner_address_phone']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='partner_address_email']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//group/group[1]/field[@name='partner_id']" position="before">
+
+                <field name="dealer_id" required="1" string="Customer" domain="[('name', '=', 'abcdef7')]"
+                       options="{'no_quick_create':True,'no_create_edit':False}"
+                       attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+
+            </xpath>
+            <xpath expr="//group/group[2]/field[@name='partner_id']" position="before">
+
+                <field name="dealer_id" required="1" string="Customer" domain="[('name', '=', 'abcdef7')]"
+                       options="{'no_quick_create':True,'no_create_edit':False}"
+                       attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                <field name="dealer_phone" required="1" readonly="1"/>
+                <field name="dealer_email"/>
+                <field name="customer_pan" optional="show" readonly="1" force_save="1"/>
+                <!--                                                <field name="a_id"/>-->
+
+                <field name="current_user_id" invisible="1"/>
+
+                <!--                <field name="is_blpl_team"/>-->
+                <!--                <field name="is_national_head"/>-->
+
+            </xpath>
+
+            <xpath expr="//field[@name='date_deadline']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='date_deadline']" position="before">
+
+                <field name="current_user_id" string="Created by" readonly="1" force_save="1"/>
+                <field name="current_user_email_address" readonly="1" force_save="1"/>
+
+                <!--                <field name="current_user_group" readonly="0"/>-->
+                <field name="create_date" invisible="1"/>
+                <field name="custom_create_date" readonly="1" attrs="{'invisible': [('create_date', '=', False)]}"/>
+                <field name="visit_date" readonly="1" force_save="1"
+                       attrs="{'invisible': [('visit_date', '=', False)]}"/>
+                <field name="order_date" readonly="1" force_save="1"
+                       attrs="{'invisible': [('order_date', '=', False)]}"/>
+                <field name="quote_date" readonly="1" force_save="1"
+                       attrs="{'invisible': [('quote_date', '=', False)]}"/>
+                <field name="order_value"
+                       attrs="{'invisible': [('state', 'in', ('draft', '1_new_lead', '2_first_contact', '2a_online_meet_status', '3_showroom_visit'))], 'readonly': [('state', '!=', '4_quote')]}"/>
+
+                <field name="scheme"
+                       attrs="{'invisible': [('state', 'in', ('draft', '1_new_lead', '2_first_contact', '2a_online_meet_status', '3_showroom_visit'))], 'readonly': [('state', '!=', '4_quote')]}"
+                       options="{'no_open': True, 'no_create': True}"/>
+                <!--                <field name="scheme_file" filename="scheme_file_name"-->
+                <!--                       attrs="{'invisible': [('state', 'in', ('draft', '1_new_lead', '2_first_contact', '3_showroom_visit'))], 'required': [('state', '=', '4_quote')]}"-->
+                <!--                       widget="binary"/>-->
+                <!--                <field name="scheme_file_name" invisible="1"/>-->
+                <!--                <field name="file" filename="file_name"-->
+                <!--                       attrs="{'invisible': [('state', 'in', ('draft', '1_new_lead', '2_first_contact'))], 'required': [('state', '=', '3_showroom_visit')]}"/>-->
+                <!--                <field name="file_name" invisible="1"/>-->
+                <field name="anticipate_date"
+                       attrs="{'invisible': [('state', 'in', ('draft', '1_new_lead', '2_first_contact', '2a_online_meet_status', '3_showroom_visit'))], 'readonly': [('state', '!=', '4_quote')]}"/>
+                <field name="house_warming_date"
+                       attrs="{'invisible': [('state', 'in', ('draft', '1_new_lead', '2_first_contact'))]}"/>
+                <field name="sale_req_date" attrs="{'invisible': [('sale_req_date', '=', False)]}" force_save="1"
+                       readonly="1"/>
+                <field name="type_of_order" readonly="1" attrs="{'invisible': [('type_of_order', '=', False)]}"/>
+                <field name="crm_admin_state_access" invisible="1"/>
+                <field name="company_branch_type" invisible="1"/>
+            </xpath>
+
+            <xpath expr="//field[@name='date_deadline']" position="after">
+                <field name="lost_reason" string='Bounce Reason' attrs="{'invisible': [('active', '=', True)]}"/>
+                <field name="bounce_date" attrs="{'invisible': [('active', '=', True)]}"/>
+            </xpath>
+
+            <xpath expr="//field[@name='phone']" position="after">
+                <field name="source_dealer_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                <field name="freelancer_id"
+                       attrs="{'required': [('source_id', '=', 49)], 'readonly': [('state', '!=', 'draft')]}"/>
+
+                <field name="associate_id"
+                       attrs="{'required': [('source_id', '=', 3)], 'readonly': [('state', '!=', 'draft')]}"/>
+                <!--                domain="['&amp;',('partner_share', '=', False),('is_blpl_associate_id', '=', False)]"/>-->
+                <field name="source_id" required="1" string="Lead Source"
+                       attrs="{'readonly': [('state', '!=', 'draft')]}" widget="selection"/>
+                <field name="approximate_budget_id"
+                       attrs="{'invisible': [('state', 'in', ('draft', '1_new_lead', '2_first_contact'))], 'readonly': [('state', '!=', '2a_online_meet_status')]}"/>
+                <field name="quote_value"
+                       attrs="{'invisible': [('state', 'in', ('draft', '1_new_lead', '2_first_contact', '2a_online_meet_status'))], 'readonly': [('state', '!=', '3_showroom_visit')]}"/>
+
+                <!--                <field name="customer_budget" attrs="{'invisible': [('state', 'in', ('draft', '1_new_lead'))]}"/>-->
+                <!--                <field name="customer_budget_value" attrs="{'invisible': [('state', 'in', ('draft', '1_new_lead'))]}"/>-->
+            </xpath>
+            <!--            <xpath expr="//field[@name='phone']" position="after">-->
+
+
+            <!--                <field name="bounce_stage" invisible="1"/>-->
+            <!--                <field name="lost_reason_id"-->
+            <!--                       attrs="{'required': [('bounce_stage', '=', True)], 'invisible':[('bounce_stage','=', False)]}"/>-->
+            <!--            </xpath>-->
+            <xpath expr="//field[@name='priority']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//page[@name='lead']" position="attributes">
+                <attribute name="attrs">{'invisible': [('state', '=', 'draft')]}</attribute>
+            </xpath>
+            <xpath expr="//group[@name='Misc']/field[@name='referred']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//group[@name='Misc']/field[@name='referred']" position="after">
+                <field name="follow_date"/>
+                <field name="next_follow_date"/>
+                <field name="meeting" widget="radio"
+                       attrs="{'readonly': [('state', 'not in', ('2_first_contact'))], 'invisible': [('state', 'in', ('draft', '1_new_lead'))]}"/>
+                <field name="meeting_date" force_save="1" readonly="1"
+                       attrs="{'invisible': [('meeting_date', '=', False)]}"/>
+            </xpath>
+            <xpath expr="//field[@name='day_open']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='day_close']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='team_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='company_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='tag_ids']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//h2[1]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[5]" position="replace">
+
+                <button name="action_set_lost" string="Bounce" type="object"
+                        attrs="{'invisible': ['|', ('type', '=', 'opportunity'), '&amp;', ('probability', '=', 0), ('active', '=', False)]}"/>
+            </xpath>
+            <xpath expr="//button[@name='%(crm.crm_lead_lost_action)d']" position="replace">
+                <button name="%(crm.crm_lead_lost_action)d" string="8-Bounced"
+                        type="action" class="oe_highlight" context="{'default_lead_id': active_id}"
+                        attrs="{'invisible': ['|', '|', '|', '|', ('state', '=', '8_bounced'), ('state', '=', '5a_order_placed'), ('state', '=', '5b_order_placed'), ('state', '=', '5c_order_placed'), ('state', '=', '5d_order_placed')]}"/>
+            </xpath>
+            <xpath expr="//page[@name='lead']/group/group[1]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <!--            <xpath expr="//page[@name='lead']/group/group[1]/field[@name='partner_name']" position="before">-->
+            <!--                <field name="contact_name" invisible="1"/>-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//page[@name='lead']/group/group[1]/field[@name='website']" position="attributes">-->
+            <!--                <attribute name="invisible">1</attribute>-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//page[@name='lead']/group/group[1]/field[@name='partner_name']" position="attributes">-->
+            <!--                <attribute name="invisible">1</attribute>-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//page[@name='lead']/group/group[1]/field[@name='street']" position="attributes">-->
+            <!--                <attribute name="invisible">1</attribute>-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//page[@name='lead']/group/group[1]/field[@name='street2']" position="attributes">-->
+            <!--                <attribute name="invisible">1</attribute>-->
+            <!--            </xpath>-->
+            <!--             <xpath expr="//page[@name='lead']/group/group[1]/field[@name='city']" position="attributes">-->
+            <!--                <attribute name="invisible">1</attribute>-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//page[@name='lead']/group/group[1]/field[@name='state_id']" position="attributes">-->
+            <!--                <attribute name="invisible">1</attribute>-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//page[@name='lead']/group/group[1]/field[@name='zip']" position="attributes">-->
+            <!--                <attribute name="invisible">1</attribute>-->
+            <!--            </xpath>-->
+            <!--             <xpath expr="//page[@name='lead']/group/group[1]/field[@name='country_id']" position="attributes">-->
+            <!--                <attribute name="invisible">1</attribute>-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//page[@name='lead']/group/group[1]/field[@name='lang_id']" position="attributes">-->
+            <!--                <attribute name="invisible">1</attribute>-->
+            <!--            </xpath>-->
+            <xpath expr="//group[@class='mt48']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//page[@name='lead']/group/group[3]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+
+            <xpath expr="//page[@name='lead']" position="after">
+                <page name="crm_lead_docu" string="Pre Sale Files">
+
+                    <field name="lead_doc_line_ids">
+                        <tree editable="bottom">
+                            <field name="name"/>
+                            <field name="file_doc" widget="binary" filename="file_name"/>
+                            <field name="file_name" invisible="1"/>
+
+
+                        </tree>
+                    </field>
+
+
+                </page>
+                <!--                <page name="blpl_team" string="Direct Store Team" attrs="{'invisible': ['&amp;' ,('is_blpl_team', '=', False), ('is_national_head', '=', False)]}">-->
+                <page name="blpl_team" string="Direct Store Team"
+                      attrs="{'invisible': [('company_branch_type', '!=', 'direct_store')]}">
+
+                    <!--                <page name="blpl_team" string="Direct Store Team">-->
+
+                    <group name="container_row_2">
+                        <group>
+
+
+                            <field name="blpl_store_team_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="interior_consultant_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="sales_team_lead_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="sales_lead_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="blpl_service_techinician_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="deal_associate_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="blpl_associate_ids" widget="many2many_tags" invisible="1"/>
+
+
+                            <field name="blpl_master_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="blpl_store_team_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="interior_consultant_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="sales_team_lead_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="sales_lead_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="blpl_service_techinician_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="deal_associate_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="blpl_associate_id" options="{'no_open': True, 'no_create': True}"/>
+                        </group>
+                    </group>
+                </page>
+                <page name="blpl2_team" string="Direct BLPL Team"
+                      attrs="{'invisible': [('company_branch_type', '!=', 'direct_store')]}">
+                    <group>
+                        <group>
+                            <field name="national_head_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="regional_bdm_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="bdm_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="blpl_service_manager_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="blpl_service_engineer_ids" widget="many2many_tags" invisible="1"/>
+
+                            <field name="regional_bdm_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="bdm_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="blpl_service_manager_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="blpl_service_engineer_id" options="{'no_open': True, 'no_create': True}"/>
+                        </group>
+                    </group>
+                </page>
+
+                <!--                                <page name="franchisee_team" string="Franchisee Team" attrs="{'invisible': ['&amp;' ,('is_blpl_team', '=', True), ('is_national_head', '=', False)]}">-->
+                <page name="franchisee_team" string="Franchisee Team"
+                      attrs="{'invisible': [('company_branch_type', '!=', 'franchisee')]}">
+
+                    <!--                <page name="franchisee_team" string="Franchisee Team">-->
+
+                    <group>
+                        <group>
+
+                            <field name="franchisee_owner_ids" widget="many2many_tags" invisible="1"/>
+
+                            <field name="sales_cordinators_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="sales_managere_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="sales_executive_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="service_technician_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="franchisee_dealer_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="associates_ids" widget="many2many_tags" invisible="1"/>
+
+
+                            <field name="franchisee_master_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="franchisee_profile_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="franchisee_owner_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="sales_cordinators_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="sales_managere_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="sales_executive_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="service_technician_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="franchisee_dealer_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="associates_id" options="{'no_open': True, 'no_create': True}"/>
+                        </group>
+                    </group>
+                </page>
+                <page name="franchisee_blpl_team" string="Franchisee BLPL Team"
+                      attrs="{'invisible': [('company_branch_type', '!=', 'franchisee')]}">
+                    <group>
+                        <group>
+                            <field name="franchisee_national_head_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="franchisee_rm_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="franchisee_bdm_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="franchisee_blpl_service_manager_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="franchisee_blpl_service_engineer_ids" widget="many2many_tags" invisible="1"/>
+
+                            <field name="franchisee_rm_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="franchisee_bdm_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="franchisee_blpl_service_manager_id"
+                                   options="{'no_open': True, 'no_create': True}"/>
+                            <field name="franchisee_blpl_service_engineer_id"
+                                   options="{'no_open': True, 'no_create': True}"/>
+
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+
+            <!--            <xpath expr="//field[@name='email_from']" position="attributes">-->
+            <!--                <attribute name="string">Dealer Email</attribute>-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//field[@name='type_of_order']" position="after">-->
+            <!--                                <fild name="lead_doc_line"/>-->
+            <!--                                <fild name="is_quote_create"/>-->
+
+            <!--            </xpath>-->
+
+        </field>
+    </record>
+    <!--CRM filter and group by -->
+    <!-- Opportunities by user and team Search View -->
+    <record id="view_crm_case_opportunities_filter_inherit" model="ir.ui.view">
+        <field name="name">crm.lead.search.opportunity.inherit</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.view_crm_case_opportunities_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//field[@name='tag_ids']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//field[@name='team_id']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//field[@name='stage_id']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+
+            <xpath expr="//filter[@name='unassigned']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//filter[@name='open_opportunities']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//filter[@name='message_needaction']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//filter[@name='won']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//filter[@name='lost']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//filter[@name='inactive']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+
+            <xpath expr="//filter[@name='salesperson']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//filter[@name='saleschannel']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//filter[@name='stage']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//filter[@name='city']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//filter[@name='country']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//filter[@name='lostreason']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//filter[@name='compaign']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//filter[@name='medium']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//filter[@name='close_date']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="after">
+                                <field name="seq_name"/>
+                <field name="partner_id" operator="child_of" string="Store Name" filter_domain="[
+                        '|',
+                        ('partner_id', 'ilike', self),
+                        ('partner_name', 'ilike', self),
+                        ]"/>
+                <field name="dealer_id" operator="child_of" string="Customer" filter_domain="[
+                        '|', '|',
+                        ('dealer_id', 'ilike', self),
+                        ('dealer_phone', 'ilike', self),
+                        ('dealer_email', 'ilike', self)]"/>
+            </xpath>
+            <xpath expr="//field[@name='city']" position="after">
+                <field name="next_follow_date"/>
+                <field name="follow_date"/>
+                <field name="meeting_date"/>
+                <field name="visit_date"/>
+                <field name="quote_date"/>
+                <field name="order_date"/>
+                <field name="anticipate_date"/>
+                <field name="sale_req_date"/>
+            </xpath>
+            <xpath expr="//filter[@name='creation_date']" position="after">
+                <filter string="Next Followup Date" name="next_follow_date" date="next_follow_date"/>
+                <filter string="Last Followup Date" name="follow_date" date="follow_date"/>
+                <filter string="Online Meeting Date" name="meeting_date" date="meeting_date"/>
+                <filter string="Showroom Visit Date" name="visit_date" date="visit_date"/>
+                <filter string="Quote Date" name="quote_date" date="quote_date"/>
+                <filter string="Order Date" name="order_date" date="order_date"/>
+                <filter string="Anticipated Delivery Date" name="anticipate_date" date="anticipate_date"/>
+                <filter string="Sale Order Request Date" name="sale_req_date" date="sale_req_date"/>
+
+                <filter string="Creation of lead" name="state" domain="[('state', '=', 'draft')]"/>
+                <filter string="1-New lead" name="state" domain="[('state', '=', '1_new_lead')]"/>
+                <filter string="2-First contact" name="state" domain="[('state', '=', '2_first_contact')]"/>
+                <filter string="2A-Online Meeting" name="state" domain="[('state', '=', '2a_online_meet_status')]"/>
+                <filter string="3-ShowRoom visit" name="state" domain="[('state', '=', '3_showroom_visit')]"/>
+                <filter string="4-Quote" name="state" domain="[('state', '=', '4_quote')]"/>
+                <filter string="5A-Order placed token" name="state" domain="[('state', '=', '5a_order_placed')]"/>
+                <filter string="5B-Order placed express" name="state" domain="[('state', '=', '5b_order_placed')]"/>
+                <filter string="5C-Order placed standard" name="state" domain="[('state', '=', '5c_order_placed')]"/>
+                <filter string="5D-Order placed lightning" name="state" domain="[('state', '=', '5d_order_placed')]"/>
+                <filter string="6A-Sale order requesting" name="state"
+                        domain="[('state', '=', '6_sale_order_requested')]"/>
+                <filter string="6B-Sale order requested" name="state" domain="[('state', '=', '6b_sale_requested')]"/>
+                <filter string="7A-Sales order for approval" name="state"
+                        domain="[('state', '=', '7_sale_order_created')]"/>
+                <filter string="7B-Sales order approved" name="state"
+                        domain="[('state', '=', '7_approved_sale_order')]"/>
+                <filter string="8-Bounced" name="state" domain="[('state', '=', '8_bounced')]"/>
+            </xpath>
+
+
+            <xpath expr="//group/filter[@name='date_deadline']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//group/filter[@name='date_closed']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+
+            <xpath expr="//group/filter[@name='source']" position="attributes">
+                <attribute name="string">Lead Source</attribute>
+            </xpath>
+            <xpath expr="//group/filter[@name='source']" position="after">
+                <filter string="Store Name" name="store_name" domain="[]" context="{'group_by':'partner_id'}"/>
+                <filter string="Lead Created By" name="created_by" domain="[]"
+                        context="{'group_by':'current_user_id'}"/>
+                <filter string="Stage Wise" name="stage_wise" domain="[]" context="{'group_by':'state'}"/>
+                <filter string="Next Followup Date" name="next_follow_date" domain="[]"
+                        context="{'group_by':'next_follow_date'}"/>
+
+                <filter string="Last Followup Date" name="follow_date" domain="[]"
+                        context="{'group_by':'follow_date'}"/>
+                <filter string="Online Meeting Date" name="meeting_date" domain="[]"
+                        context="{'group_by':'meeting_date'}"/>
+                <filter string="Showroom Visit Date" name="visit_date" domain="[]" context="{'group_by':'visit_date'}"/>
+                <filter string="Quote Date" name="quote_date" domain="[]" context="{'group_by':'quote_date'}"/>
+                <filter string="Order Date" name="order_date" domain="[]" context="{'group_by':'order_date'}"/>
+                <filter string="Anticipated Delivery Date" name="anticipate_date" domain="[]"
+                        context="{'group_by':'anticipate_date'}"/>
+                <filter string="Sale Order Request Date" name="sale_req_date" domain="[]"
+                        context="{'group_by':'sale_req_date'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_crm_lead_restrict" model="ir.actions.act_window">
+        <field name="name">Crm Lead View restrict</field>
+        <field name="res_model">crm.lead</field>
+        <!--        <field name="view_mode">tree,form,kanban,activity</field>-->
+        <field name="domain">[('state', '!=', '8_bounced')]</field>
+        <field name="context">{'create': False}</field>
+        <field name="search_view_id" ref="crm.crm_lead_view_form"/>
+        <!--        <field name="help" type="html">-->
+        <!--            <p class="o_view_nocontent_empty_folder">-->
+        <!--                There is no unpaid order from the website yet-->
+        <!--            </p><p>-->
+        <!--                Process the order once the payment is received.-->
+        <!--            </p>-->
+        <!--        </field>-->
+    </record>
+    <!--    <record model="ir.rule" id="crm_lead_form_view_rule">-->
+
+    <!--        <field name="name">crm lead form view rule</field>-->
+
+    <!--        <field name="model_id" ref="model_crm_lead"/>-->
+
+    <!--        <field eval="0" name="perm_unlink"/>-->
+
+    <!--        <field eval="0" name="perm_write"/>-->
+
+    <!--        <field eval="1" name="perm_read"/>-->
+
+    <!--        <field eval="0" name="perm_create"/>-->
+
+    <!--        <field name="domain_force">[ ('state','not in',['8_bounced'])]</field>-->
+
+    <!--        <field name="groups" eval="[(4,ref('base.group_user'))]"/>-->
+
+    <!--    </record>-->
+    <!--    <record model="ir.rule" id="crm_lead_form_view_rule">-->
+    <!--        <field name="name">Crm lead form view rule</field>-->
+    <!--        <field name="model_id" ref="model_crm_lead"/>-->
+    <!--        <field name="domain_force">[('state', 'in', '8_bounced')]</field>-->
+    <!--            <field name="perm_read" eval="1"/>-->
+    <!--            <field name="perm_write" eval="0"/>-->
+    <!--            <field name="perm_create" eval="1"/>-->
+    <!--            <field name="perm_unlink" eval="0"/>-->
+    <!--&lt;!&ndash;            <field name="groups" eval="[(4,ref('base.group_user'))]"/>&ndash;&gt;-->
+    <!--        </record>-->
+
+
+    <record id="crm_stage_form_inherit" model="ir.ui.view">
+        <field name="name">crm.stage.form.inherit</field>
+        <field name="model">crm.stage</field>
+        <field name="inherit_id" ref="crm.crm_stage_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='is_won']" position="after">
+                <field name="is_showroom_visit"/>
+                <field name="is_followup"/>
+                <field name="is_bounce"/>
+                <field name="is_quote" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!--    &lt;!&ndash; Lead Menu &ndash;&gt;&lt;!&ndash;remove kanban view &ndash;&gt;-->
+    <!--        <record model="ir.actions.act_window" id="crm.crm_lead_all_leads">-->
+    <!--            <field name="name">Leads</field>-->
+    <!--            <field name="res_model">crm.lead</field>-->
+    <!--            <field name="view_mode">tree,graph,pivot,calendar,form,activity</field>-->
+    <!--            <field name="domain">['|', ('type','=','lead'), ('type','=',False)]</field>-->
+    <!--            <field name="search_view_id" ref="crm.view_crm_case_leads_filter"/>-->
+    <!--            <field name="context">{-->
+    <!--                    'default_type':'lead',-->
+    <!--                    'search_default_type': 'lead',-->
+    <!--                    'search_default_to_process':1,-->
+    <!--                }-->
+    <!--            </field>-->
+    <!--        </record>-->
+
+    <!--    &lt;!&ndash; 'My Pipeline' menu : Server action, act_window_views and act_windows &ndash;&gt;-->
+    <!--        <record model="ir.actions.act_window" id="crm.crm_lead_opportunities">-->
+    <!--            <field name="name">Opportunities</field>-->
+    <!--            <field name="res_model">crm.lead</field>-->
+    <!--            <field name="view_mode">tree,graph,pivot,form,calendar,activity</field>-->
+    <!--            <field name="domain">[('type','=','opportunity')]</field>-->
+    <!--            <field name="context">{-->
+    <!--                    'default_type': 'opportunity',-->
+    <!--                }-->
+    <!--            </field>-->
+    <!--            <field name="search_view_id" ref="crm.view_crm_case_opportunities_filter"/>-->
+    <!--        </record>-->
+
+    <!--    <record model="ir.actions.act_window" id="crm.crm_lead_action_pipeline">-->
+    <!--            <field name="name">Pipeline</field>-->
+    <!--            <field name="res_model">crm.lead</field>-->
+    <!--            <field name="view_mode">tree,graph,pivot,form,calendar,activity</field>-->
+    <!--            <field name="domain">[('type','=','opportunity')]</field>-->
+    <!--            <field name="context">{-->
+    <!--                    'default_type': 'opportunity',-->
+    <!--                    'search_default_assigned_to_me': 1-->
+    <!--            }</field>-->
+    <!--            <field name="search_view_id" ref="crm.view_crm_case_opportunities_filter"/>-->
+    <!--        </record>-->
+
+    <!--    <record id="crm.crm_lead_action_pipeline_view_kanban" model="ir.actions.act_window.view">-->
+    <!--            <field name="sequence" eval="0"/>-->
+    <!--            <field name="view_mode">kanban</field>-->
+    <!--            <field name="view_id" ref="crm_case_kanban_view_leads"/>-->
+    <!--            <field name="act_window_id" ref="crm_lead_action_pipeline"/>-->
+    <!--        </record>-->
+    <record model="ir.actions.act_window" id="crm.crm_lead_action_pipeline">
+        <field name="name">Pipeline</field>
+        <field name="res_model">crm.lead</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('type','=','opportunity')]</field>
+        <field name="context">{
+            'default_type': 'opportunity',
+            'search_default_assigned_to_me': 1
+            }
+        </field>
+        <field name="search_view_id" ref="crm.view_crm_case_opportunities_filter"/>
+        <field name="limit">20</field>
+    </record>
+    <!--    <field name="limit">100</field>        </record>-->
+
+    <record id="crm.crm_lead_lost_view_form" model="ir.ui.view">
+        <field name="name">crm.lead.lost.form</field>
+        <field name="model">crm.lead.lost</field>
+        <field name="arch" type="xml">
+            <form string="Bounce Reason">
+                <group class="oe_title">
+                    <field name="lost_reason_id" string="Bounce Reason"/>
+                </group>
+                <footer>
+                    <button name="action_lost_reason_apply" string="Submit" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!--    <record id="crm.crm_lead_action_pipeline_view_kanban" model="ir.actions.act_window.view">-->
+    <!--            <field name="view_mode">kanban</field>-->
+    <!--            <field name="view_id" ref="crm.crm_case_kanban_view_leads"/>-->
+    <!--            <field name="act_window_id" ref="crm.crm_lead_action_pipeline"/>-->
+    <!--        </record>-->
+    <!--        <record id="crm_lead_action_pipeline_view_kanban" model="ir.actions.act_window.view">-->
+    <!--            <field name="sequence" eval="6"/>-->
+    <!--            <field name="view_mode">kanban</field>-->
+    <!--            <field name="view_id" eval="False"/>-->
+    <!--            <field name="act_window_id" eval="False"/>-->
+    <!--        </record>-->
+
+    <!--    <record id="crm.crm_lead_action_pipeline_view_kanban" model="ir.actions.act_window.view">-->
+    <!--            <field name="sequence" eval="0"/>-->
+    <!--            <field name="view_mode">kanban</field>-->
+    <!--            <field name="view_id" eval="False"/>-->
+    <!--            <field name="act_window_id" eval="False"/>-->
+    <!--        </record>-->
+
+
+    <!--    <record id="res_partner_view_buttons" model="ir.ui.view">-->
+    <!--            <field name="name">res.partner.view.buttons</field>-->
+    <!--            <field name="model">res.partner</field>-->
+    <!--            <field name="inherit_id" ref="base.view_partner_form" />-->
+    <!--            <field name="priority" eval="3"/>-->
+    <!--            <field name="groups_id" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>-->
+    <!--            <field name="arch" type="xml">-->
+    <!--                <div name="button_box" position="inside">-->
+    <!--                    <button class="oe_stat_button" type="action" name="%(sale.act_res_partner_2_sale_order)d"-->
+    <!--                        groups="sales_team.group_sale_salesman"-->
+    <!--                        icon="fa-usd">-->
+    <!--                        <field string="Sales" name="sale_order_count" widget="statinfo"/>-->
+    <!--                    </button>-->
+    <!--                </div>-->
+    <!--                <page name="internal_notes" position="inside">-->
+    <!--                    <group colspan="2" col="2" groups="sale.group_warning_sale">-->
+    <!--                        <separator string="Warning on the Sales Order" colspan="4" />-->
+    <!--                            <field name="sale_warn" nolabel="1" />-->
+    <!--                            <field name="sale_warn_msg" colspan="3" nolabel="1"-->
+    <!--                                    attrs="{'required':[('sale_warn', '!=', False), ('sale_warn','!=','no-message')],'readonly':[('sale_warn','=','no-message')]}"/>-->
+    <!--                    </group>-->
+    <!--                </page>-->
+    <!--            </field>-->
+    <!--        </record>-->
+
+
+    <record id="view_partner_form_inherit" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='sales_purchases']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//page[3]" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//page[4]" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//field[@name='parent_id']" position="attributes">
+                <attribute name="groups">ind_access_extend.group_hide_menus</attribute>
+            </xpath>
+            <xpath expr="//field[@name='state_id']" position="attributes">
+                <attribute name="options">{'no_create_edit': True, 'no_create': True}</attribute>
+            </xpath>
+
+
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="customer_pan" readonly="0"/>
+            </xpath>
+            <xpath expr="//page[5]" position="after">
+                <page name="blpl_team" string="Direct Store Team" invisible="1">
+                    <group name="container_row_2">
+                        <group>
+
+                            <!--                            <field name="blpl_master_id"/>-->
+                            <!--                            <field name="franchisee_master_ids" widget="many2many_tags"/>-->
+
+                            <field name="is_regional_bdm"/>
+                            <field name="is_bdm"/>
+                            <field name="is_blpl_service_manager"/>
+                            <field name="is_blpl_service_engineer"/>
+                            <field name="is_national_head"/>
+                            <field name="is_blpl_store_team"/>
+                            <field name="is_interior_consultant"/>
+                            <field name="is_sales_team_lead"/>
+                            <field name="is_sales_lead"/>
+                            <field name="is_blpl_service_techinician"/>
+                            <field name="is_deal_associate"/>
+                            <field name="is_blpl_associate_id" readonly="0" force_save="1"/>
+
+                        </group>
+                    </group>
+                </page>
+                <page name="franchisee_team" string="Franchisee Team" invisible="1">
+                    <group name="container_row_2">
+                        <group>
+                            <field name="is_franchisee_national_head"/>
+                            <field name="is_franchisee_rm"/>
+                            <field name="is_franchisee_bdm"/>
+                            <field name="is_franchisee_blpl_service_manager"/>
+                            <field name="is_franchisee_blpl_service_engineer"/>
+                            <field name="is_franchisee_owner"/>
+                            <field name="is_sales_cordinators"/>
+                            <field name="is_sales_managere"/>
+                            <field name="is_sales_executive"/>
+                            <field name="is_service_technician"/>
+                            <field name="is_franchisee_dealer"/>
+                            <field name="is_associates"/>
+
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+
+
+            <!--            <xpath expr="//field[@name='state_id']" position="attributes">-->
+            <!--                <attribute name="required">0</attribute>-->
+            <!--            </xpath>-->
+
+        </field>
+    </record>
+    <!--    <record id="l10n_in_view_partner_form_inherit" model="ir.ui.view">-->
+    <!--        <field name="name">l10n.in.res.partner.vat.beth.inherit</field>-->
+    <!--        <field name="model">res.partner</field>-->
+    <!--        <field name="inherit_id" ref="l10n_in.view_partner_form"/>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <xpath expr="//field[@name='state_id']" position="attributes">-->
+    <!--                <attribute name="required">{'required': ['|', ('l10n_in_country_code','=', 'IN'), ('l10n_in_country_code','=', False)]}</attribute>-->
+    <!--            </xpath>-->
+    <!--        </field>-->
+    <!--    </record>-->
+
+    <!--Opportunity Master-->
+
+    <record id="view_opportunty_form" model="ir.ui.view">
+        <field name="name">opportunity.master.form</field>
+        <field name="model">opportunity.master</field>
+        <field name="arch" type="xml">
+            <form string="Opportunity Master">
+                <group>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_opportunty_tree" model="ir.ui.view">
+        <field name="name">opportunity.master.tree</field>
+        <field name="model">opportunity.master</field>
+        <field name="arch" type="xml">
+            <tree string="Opportunity Master">
+                <field name="name"/>
+                <!--                <button name="action_opportunity" type="object" icon="fa-expand" title="Open" aria-label="Open"-->
+                <!--                                    class="float-right"/>-->
+            </tree>
+        </field>
+    </record>
+
+    <!-- Configuration/Lead & Opporotunities/Lost Reasons Menu -->
+    <record id="opportunity_master_action" model="ir.actions.act_window">
+        <field name="name">Opportunity Master</field>
+        <field name="res_model">opportunity.master</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a Opportunity
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+            id="menu_opportunity_reason"
+            action="opportunity_master_action"
+            parent="crm.menu_crm_config_lead"
+    />
+
+    <!--Budget Master -->
+    <record id="view_budget_form" model="ir.ui.view">
+        <field name="name">budget.master.form</field>
+        <field name="model">budget.master</field>
+        <field name="arch" type="xml">
+            <form string="Budget Master">
+                <group>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_budget_tree" model="ir.ui.view">
+        <field name="name">budget.master.tree</field>
+        <field name="model">budget.master</field>
+        <field name="arch" type="xml">
+            <tree string="Budget Master">
+                <field name="name"/>
+
+            </tree>
+        </field>
+    </record>
+
+    <!-- Configuration/Lead & Opporotunities/Lost Reasons Menu -->
+    <record id="budget_master_action" model="ir.actions.act_window">
+        <field name="name">Budget Master</field>
+        <field name="res_model">budget.master</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a Approximate Budget
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+            id="menu_budget_reason"
+            action="budget_master_action"
+            parent="crm.menu_crm_config_lead"
+    />
+
+
+    <!--Scheme Master-->
+
+    <record id="view_scheme_form" model="ir.ui.view">
+        <field name="name">scheme.master.form</field>
+        <field name="model">scheme.master</field>
+        <field name="arch" type="xml">
+            <form string="Scheme Master">
+                <div class="oe_title">
+                    <label for="name" class="oe_edit_only" string="Scheme"/>
+                    <h1>
+                        <field name="name" required="1" placeholder="e.g. New Year scheme"/>
+                    </h1>
+                </div>
+                <group>
+
+
+                    <group string="Conditions">
+                        <field name="doc" widget="binary" filename="doc_name"/>
+                        <field name="doc_name" invisible="1"/>
+
+                        <!--                            <label for="discount" class="oe_edit_only" string="Discount"/>-->
+
+                        <field name="discount"/>
+
+                        <field name="partner_ids" widget="many2many_tags"/>
+
+                    </group>
+                    <group string="Validity">
+                        <field name="from_date" required="1"/>
+                        <field name="to_date" required="1"/>
+                        <!--                        <field name="scheme_active"/>-->
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_scheme_tree" model="ir.ui.view">
+        <field name="name">scheme_master.tree</field>
+        <field name="model">scheme.master</field>
+        <field name="arch" type="xml">
+            <tree string="scheme Master">
+                <field name="name"/>
+                <field name="doc" widget="binary" filename="doc_name"/>
+                <field name="doc_name" invisible="1"/>
+                <!--                <button name="action_opportunity" type="object" icon="fa-expand" title="Open" aria-label="Open"-->
+                <!--                                    class="float-right"/>-->
+            </tree>
+        </field>
+    </record>
+
+    <!-- Configuration/Lead & Opporotunities/Lost Reasons Menu -->
+    <record id="scheme_master_action" model="ir.actions.act_window">
+        <field name="name">scheme Master</field>
+        <field name="res_model">scheme.master</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a scheme
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+            id="menu_scheme_reason"
+            action="scheme_master_action"
+            parent="crm.menu_crm_config_lead"
+    />
+
+
+    <!--Blpl Master-->
+
+    <record id="view_blpl_form" model="ir.ui.view">
+        <field name="name">blpl.master.form</field>
+        <field name="model">blpl.master</field>
+        <field name="arch" type="xml">
+            <form string="BLPL Sales and Marketing Team Master">
+                <group>
+                    <group>
+                        <!--                                                <field name="group_id"/>-->
+
+                        <field name="national_head_id"/>
+                        <field name="regional_bdm_ids" widget="many2many_tags"/>
+                        <field name="bdm_ids" widget="many2many_tags"/>
+                        <field name="blpl_service_manager_ids" widget="many2many_tags"/>
+                        <field name="blpl_service_engineer_ids" widget="many2many_tags"/>
+                        <field name="name"/>
+
+                        <field name="blpl_store_team_ids" widget="many2many_tags"/>
+                        <field name="interior_consultant_ids" widget="many2many_tags"/>
+                        <field name="sales_team_lead_ids" widget="many2many_tags"/>
+                        <field name="sales_lead_ids" widget="many2many_tags"/>
+                        <field name="blpl_service_techinician_ids" widget="many2many_tags"/>
+                        <field name="deal_associate_ids" widget="many2many_tags"/>
+                        <field name="blpl_associate_ids" widget="many2many_tags"/>
+                        <!--                            <button name="update_group" string="Update" type="object" class="btn-primary"/>-->
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_blpl_tree" model="ir.ui.view">
+        <field name="name">blpl.master.tree</field>
+        <field name="model">blpl.master</field>
+        <field name="arch" type="xml">
+            <tree string="BLPL Sales and Marketing Team Master">
+                <field name="national_head_id"/>
+                <field name="regional_bdm_ids"/>
+
+            </tree>
+        </field>
+    </record>
+
+    <!-- Configuration/Lead & Opporotunities/Lost Reasons Menu -->
+    <record id="blpl_master_action" model="ir.actions.act_window">
+        <field name="name">Blpl Master</field>
+        <field name="res_model">blpl.master</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a BLPL Sales and Marketing Team
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+            id="menu_blpl_reason"
+            name="BLPL Master"
+            action="blpl_master_action"
+            parent="crm.menu_crm_config_lead"
+    />
+    <!--End Blpl Master-->
+
+    <!--Franchisee Master -->
+
+
+    <record id="view_franchisee_form" model="ir.ui.view">
+        <field name="name">franchisee.master.form</field>
+        <field name="model">franchisee.master</field>
+        <field name="arch" type="xml">
+            <form string="Franchisee Team Master">
+                <group>
+                    <group>
+                        <field name="company_id" invisible="1"/>
+                        <field name="name"/>
+                        <field name="franchisee_national_head_id"/>
+                        <field name="franchisee_rm_ids" widget="many2many_tags"/>
+                        <field name="franchisee_bdm_ids" widget="many2many_tags"/>
+                        <field name="franchisee_blpl_service_manager_ids" widget="many2many_tags"/>
+                        <field name="franchisee_blpl_service_engineer_ids" widget="many2many_tags"/>
+                        <field name="franchisee_profile_id"/>
+                        <field name="franchisee_owner_ids" widget="many2many_tags"/>
+                        <field name="sales_cordinators_ids" widget="many2many_tags"/>
+                        <field name="sales_managere_ids" widget="many2many_tags"/>
+                        <field name="sales_executive_ids" widget="many2many_tags"/>
+                        <field name="service_technician_ids" widget="many2many_tags"/>
+                        <field name="franchisee_dealer_ids" widget="many2many_tags"/>
+                        <field name="associates_ids" widget="many2many_tags"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_franchisee_tree" model="ir.ui.view">
+        <field name="name">franchisee.master.tree</field>
+        <field name="model">franchisee.master</field>
+        <field name="arch" type="xml">
+            <tree string="Franchisee Team Master">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Configuration/Lead & Opporotunities/Lost Reasons Menu -->
+    <record id="franchisee_master_action" model="ir.actions.act_window">
+        <field name="name">Franchisee Master</field>
+        <field name="res_model">franchisee.master</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a Franchisee Team
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+            id="menu_franchisee_reason"
+            name="Franchisee Master"
+            action="franchisee_master_action"
+            parent="crm.menu_crm_config_lead"
+    />
+
+
+    <!--End Franchisee Master -->
+
+</odoo>

@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Email to Dealer in Mrp 1-New Lead -->
+        <record id="email_template_crm_dealer_1_nwe_entry" model="mail.template">
+            <field name="name">01-New Entry</field>
+            <field name="subject">02-Design Stage</field>
+            <field name="email_from">${user.email}</field>
+            <field name="email_to">${object.partner_id.email}</field>
+            <field name="lang">${user.lang}</field>
+            <field name="model_id" ref="ind_mrp_exrend.model_mrp_production"/>
+            <field name="body_html"><![CDATA[
+				<p>Hi,</p>
+				<br/>
+				<p>Thank you for your sales order approvall customer name ${object.dealer_id.name} sales order #  ${object.origin} the production process for the order will be initated soon , we shall keep you posted of the progress  bethliving.com</p>
+				<br/>
+				<p>Regards,</p>
+				<p><strong>ERP AUTOMATION</strong></p>
+				<p>This is a system generated email, do not reply to this email ID</p>
+			]]></field>
+        </record>
+
+
+        <!-- Email to Dealer in Mrp 02-Design Stage -->
+        <record id="email_template_crm_dealer_2_design_stage" model="mail.template">
+            <field name="name">02-Design Stage</field>
+            <field name="subject">02-Design Stage</field>
+            <field name="email_from">${user.email}</field>
+            <field name="email_to">${object.partner_id.email}</field>
+            <field name="lang">${user.lang}</field>
+            <field name="model_id" ref="ind_mrp_exrend.model_mrp_production"/>
+            <field name="body_html"><![CDATA[
+				<p>Hi,</p>
+				<br/>
+				<p>Your order # ${object.origin} customer name ${object.dealer_id.name} has moved to the stage 1 of 12 stages of manufacturing. We shall update of the tentative date of reddiness to ship. Bethliving.com</p>
+				<br/>
+				<p>Regards,</p>
+				<p><strong>ERP AUTOMATION</strong></p>
+				<p>This is a system generated email, do not reply to this email ID</p>
+			]]></field>
+        </record>
+
+        <!-- Email to Dealer in Mrp 03-Ready for Punching -->
+        <record id="email_template_crm_dealer_3_ready_for_punching" model="mail.template">
+            <field name="name">03-Ready for Punching</field>
+            <field name="subject">03-Ready for Punching</field>
+            <field name="email_from">${user.email}</field>
+            <field name="email_to">${object.partner_id.email}</field>
+            <field name="lang">${user.lang}</field>
+            <field name="model_id" ref="ind_mrp_exrend.model_mrp_production"/>
+            <field name="body_html"><![CDATA[
+				<p>Hi,</p>
+				<br/>
+				<p>congratulations on your successful business with customer name ${object.dealer_id.name} please ensure payment of token for a valid token order. Bethliving.com</p>
+				<br/>
+				<p>Regards,</p>
+				<p><strong>ERP AUTOMATION</strong></p>
+				<p>This is a system generated email, do not reply to this email ID</p>
+			]]></field>
+        </record>
+
+        <!-- Email to Dealer in Mrp 04-Punching Done -->
+        <record id="email_template_crm_dealer_4_punching_done" model="mail.template">
+            <field name="name">04-Punching Done</field>
+            <field name="subject">04-Punching Done</field>
+            <field name="email_from">${user.email}</field>
+            <field name="email_to">${object.partner_id.email}</field>
+            <field name="lang">${user.lang}</field>
+            <field name="model_id" ref="ind_mrp_exrend.model_mrp_production"/>
+            <field name="body_html"><![CDATA[
+				<p>Hi,</p>
+				<br/>
+				<p>Your order # ${object.origin} customer name ${object.dealer_id.name} has moved to the stage 2 of 12 stages of manufacturing. We shall update of the tentative date of reddiness to ship. Bethliving.com</p>
+				<br/>
+				<p>Regards,</p>
+				<p><strong>ERP AUTOMATION</strong></p>
+				<p>This is a system generated email, do not reply to this email ID</p>
+			]]></field>
+        </record>
+
+        <!-- Email to Dealer in Mrp 05-Bending Done -->
+        <record id="email_template_crm_dealer_5_bending_done" model="mail.template">
+            <field name="name">05-Bending Done</field>
+            <field name="subject">05-Bending Done</field>
+            <field name="email_from">${user.email}</field>
+            <field name="email_to">${object.partner_id.email}</field>
+            <field name="lang">${user.lang}</field>
+            <field name="model_id" ref="ind_mrp_exrend.model_mrp_production"/>
+            <field name="body_html"><![CDATA[
+				<p>Hi,</p>
+				<br/>
+				<p>Your order # ${object.origin} customer name ${object.dealer_id.name} has moved to the stage 3 of 12 stages of manufacturing. The tedative date of delivery is <estmated delivery date> ( please factor a variance of 7 days). Bethliving.com</p>
+				<br/>
+				<p>Regards,</p>
+				<p><strong>ERP AUTOMATION</strong></p>
+				<p>This is a system generated email, do not reply to this email ID</p>
+			]]></field>
+        </record>
+
+        <!-- Email to Dealer in Mrp 06-Sub-Assembly -->
+        <record id="email_template_crm_dealer_6_sub_assembly" model="mail.template">
+            <field name="name">06-Sub-Assembly</field>
+            <field name="subject">06-Sub-Assembly</field>
+            <field name="email_from">${user.email}</field>
+            <field name="email_to">${object.partner_id.email}</field>
+            <field name="lang">${user.lang}</field>
+            <field name="model_id" ref="ind_mrp_exrend.model_mrp_production"/>
+            <field name="body_html"><![CDATA[
+				<p>Hi,</p>
+				<br/>
+				<p>Your order # ${object.origin} customer name ${object.dealer_id.name} has moved to the stage 4 of 12 stages of manufacturing. The tedative date of delivery is<estmated delivery date> ( please factor a variance of 7 days). Bethliving.com</p>
+				<br/>
+				<p>Regards,</p>
+				<p><strong>ERP AUTOMATION</strong></p>
+				<p>This is a system generated email, do not reply to this email ID</p>
+			]]></field>
+        </record>
+
+        <!-- Email to Dealer in Mrp 07-Colouring-To be Sent -->
+        <record id="email_template_crm_dealer_7_colouring_to_be_sent" model="mail.template">
+            <field name="name">07-Colouring-To be Sent</field>
+            <field name="subject">07-Colouring-To be Sent</field>
+            <field name="email_from">${user.email}</field>
+            <field name="email_to">${object.partner_id.email}</field>
+            <field name="lang">${user.lang}</field>
+            <field name="model_id" ref="ind_mrp_exrend.model_mrp_production"/>
+            <field name="body_html"><![CDATA[
+				<p>Hi,</p>
+				<br/>
+				<p>Your order # ${object.origin} customer name ${object.dealer_id.name} has moved to the stage  5 of 12 stages of manufacturing. The tedative date of delivery is<estmated delivery date> ( please factor a variance of 7 days). Bethliving.com</p>
+				<br/>
+				<p>Regards,</p>
+				<p><strong>ERP AUTOMATION</strong></p>
+				<p>This is a system generated email, do not reply to this email ID</p>
+			]]></field>
+        </record>
+
+        <!-- Email to Dealer in Mrp 08-Couloring-Sent -->
+        <record id="email_template_crm_dealer_8_couloring_sent" model="mail.template">
+            <field name="name">08-Couloring-Sent</field>
+            <field name="subject">08-Couloring-Sent</field>
+            <field name="email_from">${user.email}</field>
+            <field name="email_to">${object.partner_id.email}</field>
+            <field name="lang">${user.lang}</field>
+            <field name="model_id" ref="ind_mrp_exrend.model_mrp_production"/>
+            <field name="body_html"><![CDATA[
+				<p>Hi,</p>
+				<br/>
+				<p>Hi, Your order # ${object.origin} customer name ${object.dealer_id.name} has moved to the stage 6 of 12 stages of manufacturing. The tedative date of delivery is<estmated delivery date> ( please factor a variance of 7 days). Bethliving.com</p>
+				<br/>
+				<p>Regards,</p>
+				<p><strong>ERP AUTOMATION</strong></p>
+				<p>This is a system generated email, do not reply to this email ID</p>
+			]]></field>
+        </record>
+
+        <!-- Email to Dealer in Mrp 09-Colouring-Completed -->
+        <record id="email_template_crm_dealer_9_colouring_completed" model="mail.template">
+            <field name="name">09-Colouring-Completed</field>
+            <field name="subject">09-Colouring-Completed</field>
+            <field name="email_from">${user.email}</field>
+            <field name="email_to">${object.partner_id.email}</field>
+            <field name="lang">${user.lang}</field>
+            <field name="model_id" ref="ind_mrp_exrend.model_mrp_production"/>
+            <field name="body_html"><![CDATA[
+				<p>Hi,</p>
+				<br/>
+				<p>Hi, Your order # ${object.origin} customer name ${object.dealer_id.name} has moved to the stage 7 of 12 stages of manufacturing. The tedative date of delivery is<estmated delivery date> ( please factor a variance of 4 days) you may plan for the payment clerarance if any.Bethliving.com</p>
+				<br/>
+				<p>Regards,</p>
+				<p><strong>ERP AUTOMATION</strong></p>
+				<p>This is a system generated email, do not reply to this email ID</p>
+			]]></field>
+        </record>
+
+        <!-- Email to Dealer in Mrp 10-Final Assembly -->
+        <record id="email_template_crm_dealer_10_final_assembly" model="mail.template">
+            <field name="name">10-Final Assembly</field>
+            <field name="subject">10-Final Assembly</field>
+            <field name="email_from">${user.email}</field>
+            <field name="email_to">${object.partner_id.email}</field>
+            <field name="lang">${user.lang}</field>
+            <field name="model_id" ref="ind_mrp_exrend.model_mrp_production"/>
+            <field name="body_html"><![CDATA[
+				<p>Hi,</p>
+				<br/>
+				<p>Your order # ${object.origin} customer name ${object.dealer_id.name} has moved to the stage  8 of 12 stages of manufacturing. The tedative date of delivery is<estmated delivery date> ( please factor a variance of 4 days) you may plan for the payment clerarance if any.Bethliving.com</p>
+				<br/>
+				<p>Regards,</p>
+				<p><strong>ERP AUTOMATION</strong></p>
+				<p>This is a system generated email, do not reply to this email ID</p>
+			]]></field>
+        </record>
+
+        <!-- Email to Dealer in Mrp 11-QA-Approved -->
+        <record id="email_template_crm_dealer_11_qa_approved" model="mail.template">
+            <field name="name">11-QA-Approved</field>
+            <field name="subject">11-QA-Approved</field>
+            <field name="email_from">${user.email}</field>
+            <field name="email_to">${object.partner_id.email}</field>
+            <field name="lang">${user.lang}</field>
+            <field name="model_id" ref="ind_mrp_exrend.model_mrp_production"/>
+            <field name="body_html"><![CDATA[
+				<p>Hi,</p>
+				<br/>
+				<p>Your order # ${object.origin} customer name ${object.dealer_id.name} has moved to the stage 9 of 12 stages of manufacturing. The tedative date of delivery is<estmated delivery date> ( please factor a variance of 4 days) you may plan for the payment clerarance if any.Bethliving.com</p>
+				<br/>
+				<p>Regards,</p>
+				<p><strong>ERP AUTOMATION</strong></p>
+				<p>This is a system generated email, do not reply to this email ID</p>
+			]]></field>
+        </record>
+
+
+        <!-- Email to Dealer in Mrp 12-FG Created -->
+        <record id="email_template_crm_dealer_11_qa_approved" model="mail.template">
+            <field name="name">12-FG Created</field>
+            <field name="subject">12-FG Created</field>
+            <field name="email_from">${user.email}</field>
+            <field name="email_to">${object.partner_id.email}</field>
+            <field name="lang">${user.lang}</field>
+            <field name="model_id" ref="ind_mrp_exrend.model_mrp_production"/>
+            <field name="body_html"><![CDATA[
+				<p>Hi,</p>
+				<br/>
+				<p>Your order #${object.origin} customer name ${object.dealer_id.name} has moved to the stage  10 of 12 stages of manufacturing. The tedative date of delivery is<estmated delivery date>  Bethliving.com</p>
+				<br/>
+				<p>Regards,</p>
+				<p><strong>ERP AUTOMATION</strong></p>
+				<p>This is a system generated email, do not reply to this email ID</p>
+			]]></field>
+        </record>
+
+        <!-- Email to Dealer in Mrp 13-Dispatched -->
+        <record id="email_template_crm_dealer_13_dispatched" model="mail.template">
+            <field name="name">13-Dispatched</field>
+            <field name="subject">13-Dispatched</field>
+            <field name="email_from">${user.email}</field>
+            <field name="email_to">${object.partner_id.email}</field>
+            <field name="lang">${user.lang}</field>
+            <field name="model_id" ref="ind_mrp_exrend.model_mrp_production"/>
+            <field name="body_html"><![CDATA[
+				<p>Hi,</p>
+				<br/>
+				<p>Your order #${object.origin} customer name ${object.dealer_id.name} has moved to the stage  11 of 12 stages of manufacturing. Your order #${object.origin} customer name ${object.dealer_id.name} is ready for delivery subject to finance clearance. Bethliving.com</p>
+				<br/>
+				<p>Regards,</p>
+				<p><strong>ERP AUTOMATION</strong></p>
+				<p>This is a system generated email, do not reply to this email ID</p>
+			]]></field>
+        </record>
+    </data>
+</odoo>
+
